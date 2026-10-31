@@ -1,0 +1,16 @@
+{
+  "name": "abdeltl.github.io",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Personal portfolio of Abderrahman Tlemcani: software & cloud engineer building immersive 3D web experiences.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": { "three": "0.186.1" },
+  "devDependencies": { "@types/three": "0.186.0", "typescript": "5.9.3", "vite": "8.3.4" },
+  "engines": { "node": ">=20" }
+}
