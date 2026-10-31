@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Abderrahman Tlemcani — Software & Cloud Engineer, 3D Web</title>
+    <meta name="description" content="Abderrahman Tlemcani is a software & cloud engineer based in France. He designs and ships fast, immersive web experiences (Three.js / WebGL), cloud-native platforms (Kubernetes) and ServiceNow solutions." />
+    <meta name="theme-color" content="#07080c" />
+    <link rel="canonical" href="https://abdeltl.github.io/" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Abderrahman Tlemcani — Software & Cloud Engineer, 3D Web" />
+    <meta property="og:description" content="Immersive web experiences, cloud-native platforms and ServiceNow engineering. Available for freelance missions in France & remote." />
+    <meta property="og:url" content="https://abdeltl.github.io/" />
+    <meta property="og:image" content="https://abdeltl.github.io/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Abderrahman Tlemcani",
+        "jobTitle": "Software & Cloud Engineer",
+        "url": "https://abdeltl.github.io/",
+        "sameAs": ["https://github.com/AbdelTL"],
+        "knowsAbout": ["Three.js", "WebGL", "TypeScript", "Kubernetes", "DevOps", "ServiceNow", "Cloud architecture", "AI automation"],
+        "address": { "@type": "PostalAddress", "addressCountry": "FR" }
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="nav" id="top">
+      <a class="brand" href="#top" aria-label="Home"><span class="brand-mark">AT</span><span class="brand-name">Abderrahman Tlemcani</span></a>
+      <nav aria-label="Primary">
+        <a href="#work">Work</a><a href="#services">Services</a><a href="#experience">Experience</a><a href="#contact">Contact</a>
+      </nav>
+      <button class="kbd-btn" id="open-palette" type="button" aria-haspopup="dialog" aria-label="Open quick navigation"><kbd>⌘</kbd><kbd>K</kbd></button>
+    </header>
+
+    <main id="main">
+      <section class="hero" data-webgl>
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="hero-inner">
+          <p class="eyebrow"><span class="dot" aria-hidden="true"></span> Available for freelance — Q1 2027</p>
+          <h1 class="hero-title">
+            <span class="line">I engineer</span>
+            <span class="line"><em>immersive</em> web</span>
+            <span class="line">& the cloud behind it.</span>
+          </h1>
+          <p class="hero-sub">Software & cloud engineer based in France. I build fast, 3D-rich websites and web apps for brands, and the reliable platforms (Kubernetes, CI/CD, ServiceNow) that keep them running.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#work">See selected work</a>
+            <a class="btn btn-ghost" href="#contact">Start a project</a>
+          </div>
+        </div>
+        <dl class="hero-meta">
+          <div><dt>Based</dt><dd>France · <span id="local-time">--:--</span> Paris time</dd></div>
+          <div><dt>Focus</dt><dd>WebGL · TypeScript · Cloud</dd></div>
+          <div><dt>Languages</dt><dd>Français · English</dd></div>
+        </dl>
+        <div class="scroll-hint" aria-hidden="true"><span></span></div>
+      </section>
+
+      <section class="marquee" aria-label="Technologies">
+        <div class="marquee-track" id="marquee"></div>
+      </section>
+
+      <section class="section" id="work">
+        <header class="section-head">
+          <p class="eyebrow">01 — Selected work</p>
+          <h2>Client-grade demos, built end to end.</h2>
+          <p class="lead">Each project is a production-ready concept: designed, engineered, tested and deployed through CI. Brands are fictional; the code and performance budgets are real.</p>
+        </header>
+        <div class="work-grid" id="work-grid"></div>
+      </section>
+
+      <section class="section" id="services">
+        <header class="section-head">
+          <p class="eyebrow">02 — Services</p>
+          <h2>What I can build for you.</h2>
+        </header>
+        <div class="services" id="services-grid"></div>
+        <ol class="process" id="process"></ol>
+      </section>
+
+      <section class="section" id="experience">
+        <header class="section-head">
+          <p class="eyebrow">03 — Experience & projects</p>
+          <h2>From MIPS assembly to cloud platforms.</h2>
+        </header>
+        <div class="exp-layout">
+          <ol class="timeline" id="timeline"></ol>
+          <aside class="skills" id="skills" aria-label="Skills"></aside>
+        </div>
+      </section>
+
+      <section class="section" id="lab">
+        <header class="section-head">
+          <p class="eyebrow">04 — Engineering standards</p>
+          <h2>Quality you can measure.</h2>
+        </header>
+        <div class="stats" id="stats"></div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <p class="eyebrow">05 — Contact</p>
+        <h2 class="contact-title">Got a project? <em>Let's talk.</em></h2>
+        <p class="lead">Tell me about your idea, your deadline and your budget. I reply within 24 hours, in French or English.</p>
+        <div class="contact-actions" id="contact-actions"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© <span id="year">2026</span> Abderrahman Tlemcani. Built with TypeScript & Three.js, no trackers, no cookies.</p>
+      <a href="#top">Back to top ↑</a>
+    </footer>
+
+    <dialog class="palette" id="palette" aria-label="Quick navigation">
+      <form method="dialog" class="palette-inner">
+        <input id="palette-input" type="text" placeholder="Jump to… (work, services, github)" autocomplete="off" aria-label="Search" />
+        <ul id="palette-list" role="listbox"></ul>
+      </form>
+    </dialog>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
