@@ -13,6 +13,7 @@ const CSP = [
   "connect-src 'self'",
   "object-src 'none'",
   "base-uri 'self'",
+  "media-src 'self'",
   "form-action 'self' mailto:",
   'upgrade-insecure-requests',
 ].join('; ');
@@ -27,5 +28,14 @@ const csp = (): Plugin => ({
 export default defineConfig({
   base: './',
   plugins: [csp()],
-  build: { target: 'es2022', sourcemap: false, assetsInlineLimit: 0, chunkSizeWarningLimit: 900 },
+  build: {
+    target: 'es2022', sourcemap: false, assetsInlineLimit: 0, chunkSizeWarningLimit: 900,
+    rollupOptions: {
+      input: {
+        main: new URL('./index.html', import.meta.url).pathname,
+        darNila: new URL('./case/dar-nila/index.html', import.meta.url).pathname,
+        jardinVittorio: new URL('./case/jardin-vittorio/index.html', import.meta.url).pathname,
+      },
+    },
+  },
 });

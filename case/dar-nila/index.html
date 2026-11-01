@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Dar Nila: 3D-scan booking showcase · Case study · Abderrahman Tlemcani</title>
+    <meta name="description" content="Case study: a direct-booking showcase for Marrakech riad owners that opens on a real Gaussian-splat 3D scan, with three design directions and a photos-only ↔ 3D toggle." />
+    <link rel="canonical" href="https://abdeltl.github.io/case/dar-nila/" />
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content="Dar Nila: 3D-scan booking showcase" />
+    <meta property="og:image" content="https://abdeltl.github.io/work/dar-nila.jpg" />
+    <meta name="theme-color" content="#07080c" />
+  </head>
+  <body>
+    <header class="case-nav"><a href="../../">← Abderrahman Tlemcani</a><a href="../../#contact">Start a project</a></header>
+    <main>
+      <section class="case-hero">
+        <p class="eyebrow">Case study · Showcase · 2026</p>
+        <h1>Dar Nila</h1>
+        <p class="lead">Short-term-rental owners in Marrakech only have photos. Dar Nila shows them what their own direct-booking site becomes with a <strong>five-minute phone scan</strong> of their place: guests glide through the real courtyard in 3D, pick a room, and book.</p>
+        <dl class="facts">
+          <div><dt>Role</dt><dd>Concept, design, 3D, front-end</dd></div>
+          <div><dt>Stack</dt><dd>Astro · Three.js · Spark (Gaussian splats)</dd></div>
+          <div><dt>3D</dt><dd>Real scan (CC-BY), depth-map 2.5D</dd></div>
+          <div><dt>Status</dt><dd>Design gate: 3 directions</dd></div>
+        </dl>
+      </section>
+
+      <div class="case-media">
+        <video src="./a-3d-glide.mp4" poster="../../work/dar-nila.jpg" muted loop playsinline preload="metadata" aria-label="Recording: the camera glides through the scanned courtyard as the page scrolls"></video>
+      </div>
+
+      <div class="case-body">
+        <section class="case-block">
+          <h2>The problem</h2>
+          <p>Owners pay 15–20% commission to platforms, and their own sites look like every other listing: a photo carousel. A guest can't <em>feel</em> a riad from photos. The pitch needed to answer one question in two seconds: <strong>“what does my place gain from 3D?”</strong></p>
+        </section>
+        <section class="case-block">
+          <h2>What I built</h2>
+          <ul>
+            <li><strong>Scroll glide through a real scan:</strong> a Gaussian-splat capture of a courtyard rendered with Spark on Three.js. A regular photo paints first and the scan streams in after.</li>
+            <li><strong>“Photos only ↔ With a 3D scan” toggle:</strong> the same page tells the same story both ways, so an owner sees the difference on their own phone.</li>
+            <li><strong>Three 3D moments:</strong> the glide, a cut-away dollhouse room picker, and free exploration with hotspots that open the matching room.</li>
+            <li><strong>Booking flow:</strong> availability calendar, nightly price breakdown with cleaning fee and tourist tax, guest details, request-to-book confirmation (mock, no payment).</li>
+            <li><strong>Honest 3D:</strong> real scans are labelled as such, AI depth effects as “AI 3D impression”, and every asset licence is credited.</li>
+          </ul>
+        </section>
+        <section class="case-block">
+          <h2>Three directions</h2>
+          <p>Each direction has its own art direction and its own signature 3D moment. Open the interactive previews (single-file builds, best on desktop Chrome/Edge; A and C are about 16 MB because the scan is inside).</p>
+        </section>
+        <div class="directions">
+          <article class="direction">
+            <video src="./a-3d-glide.mp4" muted loop playsinline preload="none" aria-label="Direction A recording"></video>
+            <div><h3>A · Courtyard</h3><p>Forest green, bone and amber. The hero <em>is</em> the scan and glides as you scroll.</p><a href="../../previews/dar-nila-a.html" target="_blank" rel="noopener">Open interactive preview ↗</a></div>
+          </article>
+          <article class="direction">
+            <video src="./b-3d-dollhouse.mp4" muted loop playsinline preload="none" aria-label="Direction B recording"></video>
+            <div><h3>B · Editorial riad</h3><p>Paper, slate and rust. Pick your room on a cut-away model and book it in one tap.</p><a href="../../previews/dar-nila-b.html" target="_blank" rel="noopener">Open interactive preview ↗</a></div>
+          </article>
+          <article class="direction">
+            <video src="./c-3d-explore.mp4" muted loop playsinline preload="none" aria-label="Direction C recording"></video>
+            <div><h3>C · Night salon</h3><p>Black and tan. Walk the scan freely; hotspots open rooms and “Book this room”.</p><a href="../../previews/dar-nila-c.html" target="_blank" rel="noopener">Open interactive preview ↗</a></div>
+          </article>
+        </div>
+        <section class="case-block">
+          <h2>Booking, on a phone</h2>
+          <div class="pair">
+            <video src="./a-booking-flow.mp4" muted loop playsinline preload="none" aria-label="Recording of the booking flow"></video>
+            <img src="./a-mobile-3d.jpg" alt="Direction A on a phone, 3D hero" loading="lazy" />
+          </div>
+        </section>
+        <section class="case-block">
+          <h2>Engineering</h2>
+          <ul>
+            <li>3D loads after first paint and only when visible, with static fallbacks for no-WebGL2, low-power devices and reduced motion.</li>
+            <li>Depth maps generated offline with Depth Anything V2 Small for the 2.5D photo mode; dev-only tools never ship.</li>
+            <li>Frame-by-frame capture tooling to record 3D moments on a GPU-less cloud machine, plus a packer that turns each direction into one double-clickable HTML file.</li>
+            <li>Self-hosted fonts and assets, no CDN scripts; Conventional Commits and PR-based workflow.</li>
+          </ul>
+        </section>
+        <section class="case-block">
+          <h2>For your place</h2>
+          <p>A phone or LiDAR scan of your courtyard, rooms and terrace takes one visit. From it I build the same experience with <strong>your real place</strong> and no invented rooms, wired to your channel manager so the calendar never double-books.</p>
+        </section>
+      </div>
+      <p class="case-media credit">Courtyard scan: “La Cour des Lauriers – Jardin” by <a href="https://superspl.at/scene/c9aeee17" target="_blank" rel="noopener noreferrer">schague</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>, used as a stand-in. Dar Nila is a fictional property.</p>
+      <section class="case-cta">
+        <h2>Want this for your property?</h2>
+        <a class="btn btn-primary btn-lg" href="../../#contact">Let's talk</a>
+      </section>
+    </main>
+    <script type="module" src="/src/case.ts"></script>
+  </body>
+</html>

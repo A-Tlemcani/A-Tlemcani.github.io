@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Jardin Vittorio: direct-booking site, Marrakech · Case study · Abderrahman Tlemcani</title>
+    <meta name="description" content="Case study: a luxury direct-booking website for two apartments in Marrakech, synced with Airbnb and Booking.com, with layered-depth 3D photos and a strict performance budget." />
+    <link rel="canonical" href="https://abdeltl.github.io/case/jardin-vittorio/" />
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content="Jardin Vittorio: direct-booking site, Marrakech" />
+    <meta property="og:image" content="https://abdeltl.github.io/work/jardin-vittorio.jpg" />
+    <meta name="theme-color" content="#07080c" />
+  </head>
+  <body>
+    <header class="case-nav"><a href="../../">← Abderrahman Tlemcani</a><a href="../../#contact">Start a project</a></header>
+    <main>
+      <section class="case-hero">
+        <p class="eyebrow">Case study · Client project · 2026</p>
+        <h1>Jardin Vittorio</h1>
+        <p class="lead">Two private apartments in Marrakech's Hivernage, booked mostly through Airbnb and Booking.com. The owner wanted his own site to feel <strong>luxurious, simple and very clear</strong> (the previous one “felt cheap”), take bookings directly, and never double-book.</p>
+        <dl class="facts">
+          <div><dt>Role</dt><dd>Offer, research, design, build</dd></div>
+          <div><dt>Stack</dt><dd>Astro · Node · Playwright</dd></div>
+          <div><dt>Guests</dt><dd>International: English, Italian</dd></div>
+          <div><dt>Status</dt><dd>Design round 2 · in progress</dd></div>
+        </dl>
+      </section>
+
+      <div class="case-media">
+        <img src="./a-3d-wiggle.webp" alt="The garden hero photo, split into depth layers that move against each other" width="960" height="600" />
+      </div>
+
+      <div class="case-body">
+        <section class="case-block">
+          <h2>From offer to build</h2>
+          <ul>
+            <li><strong>Research first:</strong> channel-manager architecture (single source of truth, signed webhooks, booking state machine), Moroccan constraints, and payments for a non-resident owner.</li>
+            <li><strong>A clear offer:</strong> three fixed-price packs (capture requests → take bookings → full service with quarterly reporting) and a “what we need from you” list per pack.</li>
+            <li><strong>Pre-launch checklist:</strong> money traps, 20 security items, legal and trust for Morocco and GDPR, quality.</li>
+          </ul>
+        </section>
+        <section class="case-block">
+          <h2>3D without a scan</h2>
+          <p>The owner had photos, not a 3D scan. So each hero photo is <strong>AI-upscaled</strong> (tiled, up to 2880 px), then split into <strong>near / middle / far layers</strong> with a depth model, with the gaps behind each layer filled by <strong>LaMa inpainting</strong>. On arrival the camera drifts and near things slide against far ones: real parallax, nothing is scaled. The cost is a few kilobytes of JS, with no 3D engine.</p>
+        </section>
+        <section class="case-block">
+          <h2>Three directions</h2>
+          <p>Same content, same booking module (two “doors”, one per apartment; the second switches to WhatsApp until it opens), three art directions. Open the interactive previews (single files, about 3 MB each; the WhatsApp number in them is a placeholder).</p>
+        </section>
+        <div class="directions">
+          <article class="direction">
+            <img src="./a-desktop.webp" alt="Direction A, desktop page" loading="lazy" />
+            <div><h3>A · Cinematic garden</h3><p>Forest and amber. A full-bleed 3D garden with a glass booking bar docked at its foot; the gallery pans as you scroll.</p><a href="../../previews/jardin-vittorio-a.html" target="_blank" rel="noopener">Open interactive preview ↗</a></div>
+          </article>
+          <article class="direction">
+            <img src="./b-desktop.webp" alt="Direction B, desktop page" loading="lazy" />
+            <div><h3>B · Editorial riad</h3><p>Slate and terracotta, Bodoni italics. The 3D pool sits in a tall arch; booking reads as a sentence.</p><a href="../../previews/jardin-vittorio-b.html" target="_blank" rel="noopener">Open interactive preview ↗</a></div>
+          </article>
+          <article class="direction">
+            <img src="./c-desktop.webp" alt="Direction C, desktop page" loading="lazy" />
+            <div><h3>C · Night salon</h3><p>Black and tan, dark by concept: the photos are the light. A bento whose rooms light up one by one.</p><a href="../../previews/jardin-vittorio-c.html" target="_blank" rel="noopener">Open interactive preview ↗</a></div>
+          </article>
+        </div>
+        <section class="case-block">
+          <h2>On a phone</h2>
+          <img src="./a-mobile.webp" alt="Direction A at phone width, from hero to booking" loading="lazy" />
+        </section>
+        <section class="case-block">
+          <h2>Engineering</h2>
+          <ul>
+            <li>Strict CSP (<code>default-src 'self'</code>, no inline scripts or styles), so the site carries no third-party trackers.</li>
+            <li>Budgets enforced by end-to-end tests: <strong>20 KB of JS</strong> and 25 KB of CSS per page.</li>
+            <li>i18n-ready (English first, Italian next), Playwright e2e suite, Conventional Commits and a PR-only workflow.</li>
+            <li>Accounts, domain and payments opened in the client's name; card payments only through a hosted page.</li>
+          </ul>
+        </section>
+      </div>
+      <section class="case-cta">
+        <h2>Running a rental? Book direct.</h2>
+        <a class="btn btn-primary btn-lg" href="../../#contact">Let's talk</a>
+      </section>
+    </main>
+    <script type="module" src="/src/case.ts"></script>
+  </body>
+</html>
