@@ -18,8 +18,10 @@ export interface Work {
   summary: string;
   tags: string[];
   outcomes: string[];
-  live: string;
-  repo: string;
+  live?: string;
+  repo?: string;
+  /** Shown instead of links when the work is private or not yet launched. */
+  note?: string;
   accent: [string, string];
 }
 
@@ -27,45 +29,52 @@ const gh = (r: string) => ({ live: `https://abdeltl.github.io/${r}/`, repo: `htt
 
 export const work: Work[] = [
   {
-    slug: 'booking-3d-showcase',
-    title: 'Maison Lumen',
-    client: 'Boutique villa · Hospitality',
-    summary: 'A booking site where guests explore the villa in real-time 3D, tap a room to see it, switch day/night, and book with live pricing.',
-    tags: ['Three.js', 'TypeScript', 'Booking UX', 'A11y'],
-    outcomes: ['Procedural 3D villa, ~140 KB JS gzipped incl. Three.js', 'Date-range picker with nightly pricing', 'Room hotspots synced with cards'],
-    accent: ['#f4c27a', '#3a6df0'],
-    ...gh('booking-3d-showcase'),
+    slug: 'dar-nila',
+    title: 'Dar Nila',
+    client: 'Riad direct-booking showcase · Marrakech',
+    summary: 'A sales showcase for short-term-rental owners: the page opens on a real Gaussian-splat scan of a courtyard that glides as you scroll. A toggle switches between "photos only" and "with a 3D scan" so owners see the difference on their own phone.',
+    tags: ['Astro', 'Three.js', 'Gaussian splats (Spark)', 'Depth maps', 'Booking UX'],
+    outcomes: ['Scroll-driven glide through a real 3D scan', '3 design directions: glide, dollhouse room picker, explore with hotspots', 'Mock booking with calendar, price breakdown and request flow'],
+    note: 'Private repository · walkthrough on request',
+    accent: ['#e8a33d', '#2f4a3a'],
   },
   {
-    slug: 'vitorio',
-    title: 'Vitorio',
-    client: 'Cucina italiana · Restaurant',
-    summary: 'A premium restaurant website with a sculpted 3D hero, a filterable menu with dietary tags and a table reservation flow with live slot availability.',
-    tags: ['WebGL', 'Reservation flow', 'SEO local', 'Schema.org'],
-    outcomes: ['Restaurant JSON-LD for Google', 'Slot engine respecting opening hours', 'Menu filters: vegetarian, gluten-free'],
-    accent: ['#c8553d', '#f2d0a4'],
-    ...gh('vitorio'),
+    slug: 'jardin-vittorio',
+    title: 'Jardin Vittorio',
+    client: 'Client project · Two apartments, Marrakech',
+    summary: 'A direct-booking website for two luxury apartments synced with Airbnb and Booking.com. The hero photos are split into layered depth images, so the garden gently moves in 3D without a heavy scan.',
+    tags: ['Astro', 'Node', '2.5D depth layers', 'AI upscaling', 'Playwright e2e', 'i18n'],
+    outcomes: ['Photos AI-upscaled and split into near/middle/far layers (LaMa inpainting)', 'Strict CSP, 20 KB JS budget per page, e2e tests in CI', 'Offer, pricing and pre-launch checklist written with the client'],
+    note: 'Client work in progress · private repository',
+    accent: ['#c9774a', '#1f3b2d'],
   },
   {
     slug: 'atelier-3d-configurator',
     title: 'Atelier Nord',
-    client: 'Design furniture · E-commerce',
+    client: 'Design furniture · E-commerce demo',
     summary: 'A 3D product configurator: pick wood, fabric and leg finish, watch the chair update in real time, share the configuration by link and add it to the cart.',
-    tags: ['3D configurator', 'State in URL', 'Cart', 'PBR materials'],
-    outcomes: ['Live price recomputed per option', 'Shareable deep links', 'Persistent cart (localStorage)'],
+    tags: ['Three.js', 'TypeScript', 'PBR materials', 'State in URL'],
+    outcomes: ['Procedural wood & fabric textures, no model files', 'Shareable deep links, input whitelisted', 'Persistent cart synced across tabs'],
     accent: ['#d9c6a5', '#2f3e46'],
     ...gh('atelier-3d-configurator'),
   },
   {
     slug: 'orbit-saas-landing',
     title: 'Orbit',
-    client: 'B2B SaaS · Landing page',
+    client: 'B2B SaaS · Landing page demo',
     summary: 'A conversion-focused SaaS landing page with an interactive WebGL globe, a bento feature grid, monthly/yearly pricing and an accessible FAQ.',
-    tags: ['Landing page', 'WebGL globe', 'Pricing', 'Core Web Vitals'],
-    outcomes: ['GPU instanced globe (10k+ points)', 'Pricing toggle with annual savings', 'WAI-ARIA disclosure FAQ'],
+    tags: ['WebGL', 'TypeScript', 'Pricing', 'Core Web Vitals'],
+    outcomes: ['GPU instanced globe (12k points)', 'Pricing toggle with annual savings, unit-tested', 'WAI-ARIA radiogroup & native FAQ'],
     accent: ['#7a5cff', '#22d3ee'],
     ...gh('orbit-saas-landing'),
   },
+];
+
+/** Second tier: systems and experiments, shown smaller than client work. */
+export const lab = [
+  { title: 'Digital Brain', kind: 'Personal AI operating system', body: 'My own agent setup across PC, laptop and phone: long-term memory, one owning session per project with written handoffs, WhatsApp as the control channel, and remote access over WireGuard with Wake-on-LAN.', tags: ['Claude Code', 'Agents', 'Memory', 'WireGuard'] }, // VERIFY wording
+  { title: 'Content Factory', kind: 'Automated short-video pipeline', body: 'Finds and fetches footage, edits a vertical cut, voices it with a fine-tuned TTS voice, then has an AI judge score it as a viewer would. Only drafts above the bar are delivered to WhatsApp.', tags: ['Python', 'TTS / voice cloning', 'FFmpeg', 'LLM-as-judge'] }, // VERIFY wording
+  { title: 'Flight alerts', kind: 'Price-watch bot', body: 'Watches routes I fly (Strasbourg ↔ Casablanca), compares fares and sends a buy-or-wait call with the price to WhatsApp.', tags: ['Python', 'Docker', 'Automation'] },
 ];
 
 export const services = [
@@ -85,9 +94,11 @@ export const process = [
 export interface TimelineItem { period: string; title: string; org: string; body: string; tags: string[]; link?: string }
 
 export const timeline: TimelineItem[] = [
-  { period: '2026 — now', title: 'Freelance engineer', org: 'Independent', body: 'Designing and shipping immersive websites, booking flows and 3D configurators for small brands; cloud setup and maintenance.', tags: ['Three.js', 'TypeScript', 'CI/CD'] },
+  { period: '2026 — now', title: 'Freelance engineer', org: 'Independent', body: 'Direct-booking websites for short-term rentals in Marrakech, immersive 3D showcases and configurators; offer, build, launch and maintenance.', tags: ['Three.js', 'TypeScript', 'CI/CD'] },
   { period: '2024 — 2026', title: 'Software & ServiceNow engineer (work-study)', org: 'Atos', body: 'ServiceNow platform work in an enterprise IT services context: instance quality, automation and delivery for client projects.', tags: ['ServiceNow', 'JavaScript', 'ITSM'] }, // VERIFY: role title and dates
   { period: '2024 — 2026', title: 'Master-level engineering programme (RNCP 7)', org: 'CESI', body: 'Software architecture, cloud, project management and innovation; final Grand Oral on technology and management topics.', tags: ['Architecture', 'Cloud', 'Management'] }, // VERIFY: exact programme name
+  { period: '2024', title: 'TakaEvent: event & room booking platform', org: 'CESI team project', body: 'Microservice architecture with separate API gateway, user, reservation, room, email and database services plus a web UI, built as a team.', tags: ['Microservices', 'REST', 'Team project'], link: 'https://github.com/TakaEventCesi' },
+  { period: '2026', title: 'Grand Oral: Microsoft 365 Copilot in the enterprise', org: 'CESI', body: 'Final oral on deploying generative AI at enterprise scale: governance, security, adoption and ROI, with a full presentation system.', tags: ['AI governance', 'M365', 'Management'] }, // VERIFY topic
   { period: '2026', title: 'Kubernetes deployment (bloc 3)', org: 'CESI project', body: 'Declarative Kubernetes manifests to deploy and operate a multi-service application.', tags: ['Kubernetes', 'YAML', 'DevOps'], link: 'https://github.com/AbdelTL/bloc3' },
   { period: '2025', title: 'ServiceNow instance scan checks', org: 'Open source', body: 'Worked with a collection of several hundred instance-scan checks to audit ServiceNow instances for quality and security issues.', tags: ['ServiceNow', 'Code quality'], link: 'https://github.com/AbdelTL/my_instance_scan_collection' },
   { period: '2023', title: 'First portfolio', org: 'Personal', body: 'Server-rendered PHP portfolio, where this site started.', tags: ['PHP', 'HTML/CSS'], link: 'https://github.com/AbdelTL/portfolio' },
@@ -96,11 +107,11 @@ export const timeline: TimelineItem[] = [
 ];
 
 export const skills: Record<string, string[]> = {
-  Frontend: ['TypeScript', 'JavaScript', 'Three.js / WebGL', 'GLSL', 'HTML & CSS', 'Vite', 'Accessibility'],
-  Backend: ['Node.js', 'PHP', 'REST APIs', 'SQL'],
-  'Cloud & DevOps': ['Kubernetes', 'Docker', 'GitHub Actions', 'Linux', 'Git'],
+  Frontend: ['TypeScript', 'JavaScript', 'Astro', 'Three.js / WebGL', 'GLSL', 'HTML & CSS', 'Vite', 'Accessibility'],
+  Backend: ['Node.js', 'Python', 'PHP', 'REST APIs', 'Microservices', 'SQL'],
+  'Cloud & DevOps': ['Kubernetes', 'Docker', 'GitHub Actions', 'Playwright', 'Linux', 'WireGuard', 'Git'],
   Platforms: ['ServiceNow', 'GitHub Pages', 'Vercel'],
-  'AI & tooling': ['Claude Code', 'LLM automation', 'Prompt engineering'],
+  'AI & tooling': ['Claude Code', 'Agent orchestration', 'LLM automation', 'TTS / voice', 'Gaussian splats', 'Depth estimation'],
 };
 
 export const stats = [
@@ -110,4 +121,4 @@ export const stats = [
   { value: 14, suffix: ' days', label: 'minimum age of any new dependency (supply-chain cooldown)' },
 ];
 
-export const marquee = ['TypeScript', 'Three.js', 'WebGL', 'GLSL', 'Vite', 'Node.js', 'Kubernetes', 'Docker', 'GitHub Actions', 'ServiceNow', 'Linux', 'Claude Code', 'Accessibility', 'SEO'];
+export const marquee = ['TypeScript', 'Astro', 'Three.js', 'Gaussian splats', 'WebGL', 'GLSL', 'Vite', 'Node.js', 'Kubernetes', 'Docker', 'GitHub Actions', 'ServiceNow', 'Linux', 'Claude Code', 'Accessibility', 'SEO'];
