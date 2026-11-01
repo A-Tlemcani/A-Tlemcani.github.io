@@ -2,7 +2,7 @@ import '@fontsource-variable/space-grotesk';
 import '@fontsource-variable/inter';
 import '@fontsource-variable/jetbrains-mono';
 import './style.css';
-import { marquee, process, profile, services, skills, stats, timeline, work } from './content';
+import { lab, marquee, process, profile, services, skills, stats, timeline, work } from './content';
 
 type Child = Node | string | null | undefined | false;
 /** Tiny DOM builder: every string goes through textContent, so content can never inject markup. */
@@ -22,8 +22,8 @@ for (const pass of [0, 1]) for (const m of marquee) track.append(h('span', pass 
 // --- Work
 $('work-grid').append(...work.map((w, i) => {
   const card = h('article', { class: 'work-card' },
-    h('a', { class: 'work-visual', href: w.live, ...ext, 'aria-label': `Open the ${w.title} live demo` },
-      h('img', { src: `./work/${w.slug}.jpg`, alt: `${w.title} demo screenshot`, loading: 'lazy', width: '1280', height: '800' }),
+    h(w.live ? 'a' : 'div', w.live ? { class: 'work-visual', href: w.live, ...ext, 'aria-label': `Open the ${w.title} live demo` } : { class: 'work-visual' },
+      h('img', { src: `./work/${w.slug}.jpg`, alt: `${w.title} screenshot`, loading: 'lazy', width: '1280', height: '800' }),
       h('span', { class: 'work-index' }, String(i + 1).padStart(2, '0'))),
     h('div', { class: 'work-body' },
       h('p', { class: 'work-client' }, w.client),
@@ -32,13 +32,19 @@ $('work-grid').append(...work.map((w, i) => {
       h('ul', { class: 'work-outcomes' }, ...w.outcomes.map((o) => h('li', {}, o))),
       h('ul', { class: 'tags' }, ...w.tags.map((t) => h('li', {}, t))),
       h('div', { class: 'work-links' },
-        h('a', { class: 'btn btn-primary btn-sm', href: w.live, ...ext }, 'Live demo ↗'),
-        h('a', { class: 'btn btn-ghost btn-sm', href: w.repo, ...ext }, 'Source'))));
+        w.live && h('a', { class: 'btn btn-primary btn-sm', href: w.live, ...ext }, 'Live demo ↗'),
+        w.repo && h('a', { class: 'btn btn-ghost btn-sm', href: w.repo, ...ext }, 'Source'),
+        w.note && h('p', { class: 'work-note' }, w.note))));
   card.style.setProperty('--a', w.accent[0]);
   card.style.setProperty('--b', w.accent[1]);
   card.querySelector('img')!.addEventListener('error', (e) => (e.target as HTMLElement).remove(), { once: true });
   return card;
 }));
+
+// --- Lab
+$('lab-grid').append(...lab.map((l) => h('article', { class: 'lab-card' },
+  h('p', { class: 'work-client' }, l.kind), h('h3', {}, l.title), h('p', {}, l.body),
+  h('ul', { class: 'tags' }, ...l.tags.map((t) => h('li', {}, t))))));
 
 // --- Services & process
 $('services-grid').append(...services.map((s) => h('article', { class: 'service' },
@@ -89,7 +95,7 @@ $('year').textContent = String(new Date().getFullYear());
 
 // --- Reveal on scroll
 const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
-document.querySelectorAll('.section-head, .work-card, .service, .tl-item, .stat, .process li').forEach((el) => { el.classList.add('reveal'); io.observe(el); });
+document.querySelectorAll('.section-head, .work-card, .lab-card, .service, .tl-item, .stat, .process li').forEach((el) => { el.classList.add('reveal'); io.observe(el); });
 
 // --- Command palette (⌘K / Ctrl+K)
 const palette = $('palette') as HTMLDialogElement;
@@ -97,7 +103,7 @@ const input = $('palette-input') as HTMLInputElement;
 const list = $('palette-list');
 const commands = [
   { label: 'Selected work', go: '#work' }, { label: 'Services', go: '#services' }, { label: 'Experience', go: '#experience' }, { label: 'Contact', go: '#contact' },
-  ...work.map((w) => ({ label: `Demo: ${w.title}`, go: w.live })), { label: 'GitHub profile', go: profile.github },
+  ...work.flatMap((w) => (w.live ? [{ label: `Demo: ${w.title}`, go: w.live }] : [])), { label: 'Systems & AI lab', go: '#systems' }, { label: 'GitHub profile', go: profile.github },
 ];
 let active = 0;
 const render = () => {

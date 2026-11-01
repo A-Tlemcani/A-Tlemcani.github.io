@@ -8,13 +8,12 @@ Personal portfolio of **Abderrahman Tlemcani**: software & cloud engineer buildi
 
 ## What's inside
 - **GPU particle hero:** 22k points (9k on mobile) displaced by simplex noise in a vertex shader, pointer parallax, and a scroll-driven morph from sphere to ring. Three.js loads lazily after first paint.
-- **Selected work:** four client-grade demos, each in its own repository with CI, tests and a live URL:
+- **Selected work** (first tier): Dar Nila (riad showcase with Gaussian-splat scans), Jardin Vittorio (client direct-booking site, Marrakech), and two open demos:
   | Demo | What it shows |
   | --- | --- |
-  | [Maison Lumen](https://github.com/AbdelTL/booking-3d-showcase) | 3D villa, day/night, booking engine |
-  | [Vitorio](https://github.com/AbdelTL/vitorio) | Restaurant, 3D hero, menu filters, reservation slots |
   | [Atelier Nord](https://github.com/AbdelTL/atelier-3d-configurator) | 3D product configurator, shareable links, cart |
   | [Orbit](https://github.com/AbdelTL/orbit-saas-landing) | SaaS landing, WebGL globe, pricing |
+- **Systems & AI lab** (second tier): Digital Brain, Content Factory, flight alerts
 - Services, process, experience timeline and skills, all driven by `src/content.ts`
 - ⌘K / Ctrl+K command palette, reduced-motion support, no trackers, no cookies
 
