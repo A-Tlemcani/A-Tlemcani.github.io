@@ -32,7 +32,7 @@ export const work: Work[] = [
     client: 'Boutique villa · Hospitality',
     summary: 'A booking site where guests explore the villa in real-time 3D, tap a room to see it, switch day/night, and book with live pricing.',
     tags: ['Three.js', 'TypeScript', 'Booking UX', 'A11y'],
-    outcomes: ['Procedural 3D villa, < 250 KB JS gzipped', 'Date-range picker with nightly pricing', 'Room hotspots synced with cards'],
+    outcomes: ['Procedural 3D villa, ~140 KB JS gzipped incl. Three.js', 'Date-range picker with nightly pricing', 'Room hotspots synced with cards'],
     accent: ['#f4c27a', '#3a6df0'],
     ...gh('booking-3d-showcase'),
   },
