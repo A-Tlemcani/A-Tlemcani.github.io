@@ -22,7 +22,7 @@ for (const pass of [0, 1]) for (const m of marquee) track.append(h('span', pass 
 // --- Work
 $('work-grid').append(...work.map((w, i) => {
   const card = h('article', { class: 'work-card' },
-    h(w.live ? 'a' : 'div', w.live ? { class: 'work-visual', href: w.live, ...ext, 'aria-label': `Open the ${w.title} live demo` } : { class: 'work-visual' },
+    h('a', w.caseStudy ? { class: 'work-visual', href: w.caseStudy, 'aria-label': `Read the ${w.title} case study` } : { class: 'work-visual', href: w.live ?? '#', ...ext, 'aria-label': `Open the ${w.title} live demo` },
       h('img', { src: `./work/${w.slug}.jpg`, alt: `${w.title} screenshot`, loading: 'lazy', width: '1280', height: '800' }),
       h('span', { class: 'work-index' }, String(i + 1).padStart(2, '0'))),
     h('div', { class: 'work-body' },
@@ -32,6 +32,7 @@ $('work-grid').append(...work.map((w, i) => {
       h('ul', { class: 'work-outcomes' }, ...w.outcomes.map((o) => h('li', {}, o))),
       h('ul', { class: 'tags' }, ...w.tags.map((t) => h('li', {}, t))),
       h('div', { class: 'work-links' },
+        w.caseStudy && h('a', { class: 'btn btn-primary btn-sm', href: w.caseStudy }, 'Case study →'),
         w.live && h('a', { class: 'btn btn-primary btn-sm', href: w.live, ...ext }, 'Live demo ↗'),
         w.repo && h('a', { class: 'btn btn-ghost btn-sm', href: w.repo, ...ext }, 'Source'),
         w.note && h('p', { class: 'work-note' }, w.note))));
@@ -103,7 +104,7 @@ const input = $('palette-input') as HTMLInputElement;
 const list = $('palette-list');
 const commands = [
   { label: 'Selected work', go: '#work' }, { label: 'Services', go: '#services' }, { label: 'Experience', go: '#experience' }, { label: 'Contact', go: '#contact' },
-  ...work.flatMap((w) => (w.live ? [{ label: `Demo: ${w.title}`, go: w.live }] : [])), { label: 'Systems & AI lab', go: '#systems' }, { label: 'GitHub profile', go: profile.github },
+  ...work.flatMap((w) => (w.caseStudy ? [{ label: `Case study: ${w.title}`, go: w.caseStudy }] : w.live ? [{ label: `Demo: ${w.title}`, go: w.live }] : [])), { label: 'Systems & AI lab', go: '#systems' }, { label: 'GitHub profile', go: profile.github },
 ];
 let active = 0;
 const render = () => {
@@ -117,7 +118,12 @@ const render = () => {
   }));
   return items;
 };
-const run = (go: string) => { palette.close(); if (go.startsWith('#')) document.querySelector(go)?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' }); else window.open(go, '_blank', 'noopener'); };
+const run = (go: string) => {
+  palette.close();
+  if (go.startsWith('#')) document.querySelector(go)?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+  else if (go.startsWith('./')) location.href = go;
+  else window.open(go, '_blank', 'noopener');
+};
 const open = () => { input.value = ''; active = 0; render(); palette.showModal(); input.focus(); };
 $('open-palette').addEventListener('click', open);
 addEventListener('keydown', (e) => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); palette.open ? palette.close() : open(); } });

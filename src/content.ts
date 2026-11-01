@@ -22,6 +22,8 @@ export interface Work {
   repo?: string;
   /** Shown instead of links when the work is private or not yet launched. */
   note?: string;
+  /** Relative URL of an in-site case study page. */
+  caseStudy?: string;
   accent: [string, string];
 }
 
@@ -35,7 +37,8 @@ export const work: Work[] = [
     summary: 'A sales showcase for short-term-rental owners: the page opens on a real Gaussian-splat scan of a courtyard that glides as you scroll. A toggle switches between "photos only" and "with a 3D scan" so owners see the difference on their own phone.',
     tags: ['Astro', 'Three.js', 'Gaussian splats (Spark)', 'Depth maps', 'Booking UX'],
     outcomes: ['Scroll-driven glide through a real 3D scan', '3 design directions: glide, dollhouse room picker, explore with hotspots', 'Mock booking with calendar, price breakdown and request flow'],
-    note: 'Private repository · walkthrough on request',
+    note: 'Private repository',
+    caseStudy: './case/dar-nila/',
     accent: ['#e8a33d', '#2f4a3a'],
   },
   {
@@ -45,8 +48,19 @@ export const work: Work[] = [
     summary: 'A direct-booking website for two luxury apartments synced with Airbnb and Booking.com. The hero photos are split into layered depth images, so the garden gently moves in 3D without a heavy scan.',
     tags: ['Astro', 'Node', '2.5D depth layers', 'AI upscaling', 'Playwright e2e', 'i18n'],
     outcomes: ['Photos AI-upscaled and split into near/middle/far layers (LaMa inpainting)', 'Strict CSP, 20 KB JS budget per page, e2e tests in CI', 'Offer, pricing and pre-launch checklist written with the client'],
-    note: 'Client work in progress · private repository',
+    note: 'Client work in progress',
+    caseStudy: './case/jardin-vittorio/',
     accent: ['#c9774a', '#1f3b2d'],
+  },
+  {
+    slug: 'restaurant-3d-showcase',
+    title: 'Trattoria Aurelia',
+    client: 'Restaurant · 3D showcase demo',
+    summary: 'A cinematic scroll story over a dressed trattoria table: photoreal scanned props lit by a real HDRI, a camera that glides through four chapters, then the menu and a live table-booking engine.',
+    tags: ['Three.js', 'PBR / HDRI', 'glTF + meshopt', 'Scroll storytelling'],
+    outcomes: ['10 CC0 scanned models, 21 MB → 3.9 MB', 'Reservation slot engine with opening hours, unit-tested', 'Owner pitch: on-site 3D scan + dish photogrammetry'],
+    accent: ['#d9573b', '#1a120d'],
+    ...gh('restaurant-3d-showcase'),
   },
   {
     slug: 'atelier-3d-configurator',
@@ -78,6 +92,7 @@ export const lab = [
 ];
 
 export const services = [
+  { title: '3D capture on site', body: 'A scan visit for your venue or property: Gaussian-splat scans of rooms and terraces, photogrammetry of products and dishes, ready for the web.', points: ['Gaussian splats', 'Photogrammetry', 'LiDAR'] },
   { title: 'Immersive websites', body: 'Brand and product sites with real-time 3D, scroll storytelling and micro-interactions that still score green on Core Web Vitals.', points: ['Three.js / WebGL', 'Motion design', 'SEO & accessibility'] },
   { title: 'Web apps & e-commerce', body: 'Booking engines, configurators, dashboards and storefronts, typed end to end and deployed through CI.', points: ['TypeScript', 'APIs & payments', 'Testing'] },
   { title: 'Cloud & DevOps', body: 'Containerised, observable infrastructure: Kubernetes manifests, CI/CD pipelines, environments and cost control.', points: ['Kubernetes', 'GitHub Actions', 'Monitoring'] },
