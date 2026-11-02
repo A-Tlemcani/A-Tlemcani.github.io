@@ -1,8 +1,8 @@
-# abdeltl.github.io
+# a-tlemcani.github.io
 
 Personal portfolio of **Abderrahman Tlemcani**: software & cloud engineer building immersive 3D web experiences and the platforms behind them.
 
-**Live → [abdeltl.github.io](https://abdeltl.github.io/)**
+**Live → [a-tlemcani.github.io](https://a-tlemcani.github.io/)**
 
 ![Portfolio](public/og.jpg)
 
@@ -11,8 +11,8 @@ Personal portfolio of **Abderrahman Tlemcani**: software & cloud engineer buildi
 - **Selected work** (first tier): Dar Nila (riad showcase with Gaussian-splat scans), Jardin Vittorio (client direct-booking site, Marrakech), and two open demos:
   | Demo | What it shows |
   | --- | --- |
-  | [Atelier Nord](https://github.com/AbdelTL/atelier-3d-configurator) | 3D product configurator, shareable links, cart |
-  | [Orbit](https://github.com/AbdelTL/orbit-saas-landing) | SaaS landing, WebGL globe, pricing |
+  | [Atelier Nord](https://github.com/A-Tlemcani/atelier-3d-configurator) | 3D product configurator, shareable links, cart |
+  | [Orbit](https://github.com/A-Tlemcani/orbit-saas-landing) | SaaS landing, WebGL globe, pricing |
 - **Systems & AI lab** (second tier): Digital Brain, Content Factory, flight alerts
 - Services, process, experience timeline and skills, all driven by `src/content.ts`
 - ⌘K / Ctrl+K command palette, reduced-motion support, no trackers, no cookies

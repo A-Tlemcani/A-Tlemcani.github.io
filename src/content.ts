@@ -5,7 +5,7 @@
 
 export const profile = {
   name: 'Abderrahman Tlemcani',
-  github: 'https://github.com/AbdelTL',
+  github: 'https://github.com/A-Tlemcani',
   linkedin: '', // VERIFY: add LinkedIn URL
   email: '', // VERIFY: add the public contact address (kept empty so no address is published by default)
   malt: '', // VERIFY: optional Malt / freelance platform profile
@@ -27,7 +27,7 @@ export interface Work {
   accent: [string, string];
 }
 
-const gh = (r: string) => ({ live: `https://abdeltl.github.io/${r}/`, repo: `https://github.com/AbdelTL/${r}` });
+const gh = (r: string) => ({ live: `https://a-tlemcani.github.io/${r}/`, repo: `https://github.com/A-Tlemcani/${r}` });
 
 export const work: Work[] = [
   {
@@ -53,14 +53,14 @@ export const work: Work[] = [
     accent: ['#c9774a', '#1f3b2d'],
   },
   {
-    slug: 'restaurant-3d-showcase',
+    slug: 'vito-3d-showcase',
     title: 'Trattoria Aurelia',
     client: 'Restaurant · 3D showcase demo',
     summary: 'A cinematic scroll story over a dressed trattoria table: photoreal scanned props lit by a real HDRI, a camera that glides through four chapters, then the menu and a live table-booking engine.',
     tags: ['Three.js', 'PBR / HDRI', 'glTF + meshopt', 'Scroll storytelling'],
     outcomes: ['10 CC0 scanned models, 21 MB → 3.9 MB', 'Reservation slot engine with opening hours, unit-tested', 'Owner pitch: on-site 3D scan + dish photogrammetry'],
     accent: ['#d9573b', '#1a120d'],
-    ...gh('restaurant-3d-showcase'),
+    ...gh('vito-3d-showcase'),
   },
   {
     slug: 'atelier-3d-configurator',
@@ -114,11 +114,11 @@ export const timeline: TimelineItem[] = [
   { period: '2024 — 2026', title: 'Master-level engineering programme (RNCP 7)', org: 'CESI', body: 'Software architecture, cloud, project management and innovation; final Grand Oral on technology and management topics.', tags: ['Architecture', 'Cloud', 'Management'] }, // VERIFY: exact programme name
   { period: '2024', title: 'TakaEvent: event & room booking platform', org: 'CESI team project', body: 'Microservice architecture with separate API gateway, user, reservation, room, email and database services plus a web UI, built as a team.', tags: ['Microservices', 'REST', 'Team project'], link: 'https://github.com/TakaEventCesi' },
   { period: '2026', title: 'Grand Oral: Microsoft 365 Copilot in the enterprise', org: 'CESI', body: 'Final oral on deploying generative AI at enterprise scale: governance, security, adoption and ROI, with a full presentation system.', tags: ['AI governance', 'M365', 'Management'] }, // VERIFY topic
-  { period: '2026', title: 'Kubernetes deployment (bloc 3)', org: 'CESI project', body: 'Declarative Kubernetes manifests to deploy and operate a multi-service application.', tags: ['Kubernetes', 'YAML', 'DevOps'], link: 'https://github.com/AbdelTL/bloc3' },
-  { period: '2025', title: 'ServiceNow instance scan checks', org: 'Open source', body: 'Worked with a collection of several hundred instance-scan checks to audit ServiceNow instances for quality and security issues.', tags: ['ServiceNow', 'Code quality'], link: 'https://github.com/AbdelTL/my_instance_scan_collection' },
-  { period: '2023', title: 'First portfolio', org: 'Personal', body: 'Server-rendered PHP portfolio, where this site started.', tags: ['PHP', 'HTML/CSS'], link: 'https://github.com/AbdelTL/portfolio' },
-  { period: '2022', title: 'MARS: MIPS assembly', org: 'Coursework', body: 'Low-level programs written in MIPS assembly and run on the MARS simulator: registers, memory, syscalls.', tags: ['Assembly', 'Computer architecture'], link: 'https://github.com/AbdelTL/mars' },
-  { period: '2021', title: 'ChatBot', org: 'Personal', body: 'A JavaScript chatbot, my first interactive web project.', tags: ['JavaScript'], link: 'https://github.com/AbdelTL/ChatBot' },
+  { period: '2026', title: 'Kubernetes deployment (bloc 3)', org: 'CESI project', body: 'Declarative Kubernetes manifests to deploy and operate a multi-service application.', tags: ['Kubernetes', 'YAML', 'DevOps'], link: 'https://github.com/A-Tlemcani/bloc3' },
+  { period: '2025', title: 'ServiceNow instance scan checks', org: 'Open source', body: 'Worked with a collection of several hundred instance-scan checks to audit ServiceNow instances for quality and security issues.', tags: ['ServiceNow', 'Code quality'], link: 'https://github.com/A-Tlemcani/my_instance_scan_collection' },
+  { period: '2023', title: 'First portfolio', org: 'Personal', body: 'Server-rendered PHP portfolio, where this site started.', tags: ['PHP', 'HTML/CSS'], link: 'https://github.com/A-Tlemcani/portfolio' },
+  { period: '2022', title: 'MARS: MIPS assembly', org: 'Coursework', body: 'Low-level programs written in MIPS assembly and run on the MARS simulator: registers, memory, syscalls.', tags: ['Assembly', 'Computer architecture'], link: 'https://github.com/A-Tlemcani/mars' },
+  { period: '2021', title: 'ChatBot', org: 'Personal', body: 'A JavaScript chatbot, my first interactive web project.', tags: ['JavaScript'], link: 'https://github.com/A-Tlemcani/ChatBot' },
 ];
 
 export const skills: Record<string, string[]> = {

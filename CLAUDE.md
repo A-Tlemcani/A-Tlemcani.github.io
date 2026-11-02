@@ -3,7 +3,7 @@
 Personal portfolio of Abderrahman Tlemcani: software & cloud engineer building immersive 3D web experiences.
 
 ## Stack
-Vite 8 + TypeScript (strict) + Three.js, no framework. Static build in `dist/`, deployed by `.github/workflows/deploy.yml` to GitHub Pages (https://abdeltl.github.io/).
+Vite 8 + TypeScript (strict) + Three.js, no framework. Static build in `dist/`, deployed by `.github/workflows/deploy.yml` to GitHub Pages (https://a-tlemcani.github.io/).
 
 ## Commands
 - `npm ci --ignore-scripts` – install (lockfile is the source of truth)

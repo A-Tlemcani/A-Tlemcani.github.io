@@ -5,11 +5,11 @@ Notes and routines that keep the portfolio and the demos discoverable. Re-run th
 ## Inputs
 | Input | Value |
 | --- | --- |
-| Site | https://abdeltl.github.io/ |
+| Site | https://a-tlemcani.github.io/ |
 | Primary audience | Small brands, hospitality, e-commerce and SaaS teams in France looking for a freelance developer |
 | Target queries (FR) | `développeur freelance three.js`, `site web 3D sur mesure`, `développeur freelance site vitrine premium`, `configurateur 3D produit e-commerce`, `freelance servicenow` |
 | Target queries (EN) | `freelance three.js developer france`, `3d product configurator developer`, `webgl landing page developer` |
-| Google Search Console | Add a URL-prefix property for `https://abdeltl.github.io/` and submit `sitemap.xml` (TODO) |
+| Google Search Console | Add a URL-prefix property for `https://a-tlemcani.github.io/` and submit `sitemap.xml` (TODO) |
 
 ## Daily (technical hygiene)
 1. Crawl every URL in `public/sitemap.xml`; flag non-200s, missing `<title>`/`<meta name="description">`, missing canonical, accidental `noindex`.
