@@ -62,10 +62,10 @@ export const skills = {
     },
   },
   'local-llms': {
-    name: 'Local LLMs (Ollama, Letta)', group: 'ai', level: 4, tier: 'build',
+    name: 'Local LLMs (Ollama)', group: 'ai', level: 4, tier: 'build',
     summary: {
-      en: 'Running models on my own machine with Ollama, and long-term agent memory with Letta, so private data stays local.',
-      fr: 'Modèles exécutés sur ma propre machine avec Ollama, et mémoire longue d’agent avec Letta, pour que les données privées restent locales.',
+      en: 'Running models on my own machine with Ollama, with a long-term memory engine I built for my agents, so private data stays local.',
+      fr: 'Modèles exécutés sur ma propre machine avec Ollama, avec un moteur de mémoire longue que j’ai construit pour mes agents, pour que les données privées restent locales.',
     },
   },
   'prompt-engineering': {

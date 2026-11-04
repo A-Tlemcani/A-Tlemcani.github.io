@@ -202,7 +202,7 @@ export const projects = {
       fr: 'Mon propre système d’agents, qui tourne d’abord sur mon PC : mémoire longue, compréhension de documents, workflows Python modulaires, et bascule entre modèles locaux et hébergés selon la tâche. WhatsApp sert de canal de commande.',
     },
     built: [
-      { en: 'Persistent memory with Letta, local models with Ollama', fr: 'Mémoire persistante avec Letta, modèles locaux avec Ollama' },
+      { en: 'Persistent memory in my own engine (hippo), local models with Ollama on an RTX 5070', fr: 'Mémoire persistante dans mon propre moteur (hippo), modèles locaux avec Ollama sur une RTX 5070' },
       { en: 'Model switching and agentic decisions based on the request', fr: 'Bascule de modèle et décisions agentiques selon la demande' },
       { en: 'Secure remote access over WireGuard with Wake-on-LAN', fr: 'Accès distant sécurisé via WireGuard avec Wake-on-LAN' },
     ],
