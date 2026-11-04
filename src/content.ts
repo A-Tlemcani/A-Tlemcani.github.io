@@ -7,7 +7,7 @@ export const profile = {
   name: 'Abderrahman Tlemcani',
   github: 'https://github.com/A-Tlemcani',
   linkedin: 'https://www.linkedin.com/in/AbderrahmanTLEMCANI',
-  email: '', // VERIFY: add the public contact address (kept empty so no address is published by default)
+  email: 'a_Tlemcani@outlook.com',
   malt: '', // VERIFY: optional Malt / freelance platform profile
 };
 
