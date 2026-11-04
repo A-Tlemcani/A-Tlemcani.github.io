@@ -20,3 +20,8 @@ Static build in `dist/`, deployed by `.github/workflows/deploy.yml` to GitHub Pa
 - Every new text needs both `en` and `fr`. Skill levels follow the 1–5 scale in `src/data/skills.ts` and only go up with a project as evidence.
 - Keep the 3D scene cheap: cap devicePixelRatio at 2, pause rendering when the tab is hidden or the canvas is off-screen, honour `prefers-reduced-motion`.
 - New dependencies: pin exact versions released at least 14 days ago.
+
+## Skills (in `.claude/skills/`, source: the Digital-Brain repo)
+- `surgical-coding` on every code change: assumptions first, minimum code, only the lines needed, test-first for bugs.
+- `plain-english` for all copy and replies (short sentences, one meaning per word). French copy follows the same rules.
+- `skill-receipts`: end each answer where a skill changed the result with the receipt table (skill · why · what changed · without it).
