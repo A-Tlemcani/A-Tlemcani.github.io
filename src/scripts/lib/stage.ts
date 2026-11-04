@@ -19,7 +19,7 @@ export interface Stage {
  *  - stops rendering when off-screen or the tab is hidden,
  *  - falls back gracefully when WebGL is unavailable.
  */
-export function createStage(canvas: HTMLCanvasElement, opts: { fov?: number; alpha?: boolean } = {}): Stage | null {
+export function createStage(canvas: HTMLCanvasElement, opts: { fov?: number; alpha?: boolean; /** Under reduced motion, render only on demand (no frame loop). */ stillWhenReduced?: boolean } = {}): Stage | null {
   let renderer: THREE.WebGLRenderer;
   try {
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: opts.alpha ?? true, powerPreference: 'high-performance' });
@@ -58,7 +58,7 @@ export function createStage(canvas: HTMLCanvasElement, opts: { fov?: number; alp
     renderer.render(scene, camera);
   };
   const sync = () => {
-    const shouldRun = visible && !document.hidden;
+    const shouldRun = visible && !document.hidden && !(reducedMotion && opts.stillWhenReduced);
     if (shouldRun && !running) { timer.reset(); renderer.setAnimationLoop(frame); }
     if (!shouldRun && running) renderer.setAnimationLoop(null);
     running = shouldRun;
