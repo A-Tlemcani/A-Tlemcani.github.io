@@ -6,7 +6,7 @@
 export const profile = {
   name: 'Abderrahman Tlemcani',
   github: 'https://github.com/A-Tlemcani',
-  linkedin: 'https://www.linkedin.com/in/AbderrahmanTLEMCANI', // VERIFY: URL taken from the CV
+  linkedin: 'https://www.linkedin.com/in/AbderrahmanTLEMCANI',
   email: '', // VERIFY: add the public contact address (kept empty so no address is published by default)
   malt: '', // VERIFY: optional Malt / freelance platform profile
 };
@@ -110,28 +110,33 @@ export const process = [
 export interface TimelineItem { period: string; title: string; org: string; body: string; tags: string[]; link?: string }
 
 export const timeline: TimelineItem[] = [
-  { period: '2024 — now', title: 'ServiceNow consultant & developer', org: 'Atos', body: 'Work-study, then developer. Since 08/2025 in an AI innovation team: prototypes with Now Assist and agentic AI; licence and version analysis to find AI use cases a client can really run; PoCs connecting external AI APIs to ServiceNow AI Agents; demos and adoption roadmaps for internal and sales teams.', tags: ['ServiceNow', 'Now Assist', 'AI Agents', 'REST'] }, // VERIFY: may Atos be named? wording OK?
-  { period: '07/2026 — now', title: 'Multi-instance management', org: 'Atos · ServiceNow', body: 'Parent/child architecture to onboard instances remotely: transport (REST/OAuth) separated from business services and Flow orchestration, runtime auth, logging and audit, monitoring, least privilege, secret protection and traceable decommissioning.', tags: ['Architecture', 'OAuth', 'Flow Designer', 'Security'] }, // VERIFY
-  { period: '05/2026 — now', title: 'Resource-management analytics', org: 'Atos · ServiceNow', body: 'Platform Analytics dashboards and KPIs, a map of legacy reports with a migration path, and end-to-end documentation of an instance that had none.', tags: ['Platform Analytics', 'KPIs', 'Documentation'] }, // VERIFY
-  { period: '03/2026 — now', title: 'Independent projects', org: 'Alongside my job', body: 'A direct-booking website for two apartments in Marrakech, and 3D showcases for hospitality and e-commerce: offer, build, launch and maintenance.', tags: ['Astro', 'Three.js', 'TypeScript', 'CI/CD'] }, // VERIFY: how to describe the freelance side
-  { period: '03 — 06/2025', title: 'Innovation lead · AI matching tool', org: 'Atos · ServiceNow', body: 'Internal tool that matches people to needs with AI, built on ServiceNow with UI Actions, Script Includes, REST Messages and Flows.', tags: ['ServiceNow', 'AI', 'Script Includes', 'Flows'] }, // VERIFY
-  { period: '2024 — 2026', title: 'MAALSI: software & IS architecture manager (Bac+5)', org: 'CESI', body: 'Work-study master-level programme: software architecture, information systems, cloud and project management.', tags: ['Architecture', 'ArchiMate', 'Management'] }, // VERIFY: 2026 graduation status
+  { period: '2026 — now', title: 'Freelance engineer', org: 'Independent', body: 'Direct-booking websites for short-term rentals in Marrakech, immersive 3D showcases and configurators; offer, build, launch and maintenance.', tags: ['Astro', 'Three.js', 'TypeScript', 'CI/CD'] },
+  { period: '07/2026 — now', title: 'Multi-instance management', org: 'Atos · ServiceNow', body: 'Parent/child architecture to onboard instances and manage personas, groups and users remotely. REST/OAuth transport kept apart from business services and Flow Designer orchestration, so nothing is duplicated. Runtime auth model (OAuth / Basic), logging and audit, monitoring dashboards, least privilege, secret protection and traceable clean-up when an instance leaves.', tags: ['Scoped app', 'OAuth 2.0', 'Flow Designer', 'Security'] },
+  { period: '05/2026 — now', title: 'Resource management & analytics lead', org: 'Atos · ServiceNow', body: 'Steering resource and pre-sales requests for a ServiceNow practice. Two operational dashboards in Platform Analytics with KPIs computed by Business Rules and Fix Scripts; map of legacy tables, notifications and reports with a migration path; end-to-end documentation of an instance that had none.', tags: ['Platform Analytics', 'KPIs', 'Business Rules', 'Documentation'] },
+  { period: '08/2025 — now', title: 'ServiceNow developer · PoC Factory', org: 'Atos', body: 'Prototyping Now Assist and agentic AI on the Now Platform; reading licences and versions to find the AI use cases a customer can actually switch on; PoCs connecting external APIs to ServiceNow AI Agents; demos and adoption roadmaps for internal and sales teams.', tags: ['Now Assist', 'AI Agents', 'GlideScript', 'REST / JSON'] },
+  { period: '07 — 08/2025', title: 'Integration developer · instance health check', org: 'Atos · ServiceNow', body: 'Gathered internal and open-source instance-scan checks, adapted them to our instance and packaged them as an Update Set that teams can deploy on customer instances to assess health and best practice.', tags: ['Instance Scan', 'Update Sets', 'Code quality'], link: 'https://github.com/A-Tlemcani/my_instance_scan_collection' },
+  { period: '03 — 06/2025', title: 'Innovation lead · AI staffing tool', org: 'Atos · ServiceNow', body: 'Designed and built a prototype that suggests the right people for a resource request using an external AI API: functional and technical architecture, UI Actions, Script Includes, REST Messages and workflow, then presented it to stakeholders.', tags: ['ServiceNow', 'External AI API', 'Script Includes', 'REST'] },
+  { period: '2024 — 2026', title: 'MAALSI: software & IS architecture manager (Bac+5, RNCP level 7)', org: 'CESI', body: 'Work-study master-level programme: software architecture, information systems, cloud and project management.', tags: ['Architecture', 'ArchiMate / C4', 'Management'] },
+  { period: '2026', title: 'Grand Oral: Microsoft 365 Copilot in the enterprise', org: 'CESI', body: 'Final oral on deploying generative AI at enterprise scale: governance, security, adoption and ROI.', tags: ['AI governance', 'M365', 'Management'] },
   { period: '2026', title: 'Kubernetes deployment (bloc 3)', org: 'CESI project', body: 'Declarative Kubernetes manifests to deploy and operate a multi-service application.', tags: ['Kubernetes', 'YAML', 'DevOps'], link: 'https://github.com/A-Tlemcani/bloc3' },
-  { period: '2025', title: 'ServiceNow instance scan checks', org: 'Study fork', body: 'Studied and adapted a collection of several hundred instance-scan checks used to audit ServiceNow instances for quality and security issues.', tags: ['ServiceNow', 'Code quality'], link: 'https://github.com/A-Tlemcani/my_instance_scan_collection' },
   { period: '2024', title: 'TakaEvent: event & room booking platform', org: 'CESI team project', body: 'Microservice architecture with separate API gateway, user, reservation, room, email and database services plus a web UI, built as a team.', tags: ['Microservices', 'REST', 'Team project'], link: 'https://github.com/TakaEventCesi' },
-  { period: '2021 — 2024', title: 'Licence (Bachelor) in Computer Science', org: 'Université de Strasbourg', body: 'Algorithms, systems, networks, databases and software engineering.', tags: ['C', 'Java', 'SQL', 'Systems'] },
+  { period: '01 — 06/2024', title: 'Web, mobile & desktop app', org: 'Université de Strasbourg · team project', body: 'One app on web, mobile, Windows and macOS: requirements with the client, V-model delivery, core logic in C#, UI in Unity, networking with Netcode, deployed on a Linux server, unit tests and CI on GitLab.', tags: ['C#', 'Unity', 'GitLab CI', 'Linux'] },
+  { period: '12/2023 — 01/2024', title: 'Secure network in C', org: 'Université de Strasbourg', body: 'TCP sockets, secured communication between users and custom commands, with unit tests and GitLab CI.', tags: ['C', 'Sockets', 'CI/CD'] },
+  { period: '08 — 11/2023', title: 'CV platform: Spring Boot API', org: 'Personal', body: 'A configurable portfolio/CV site: REST API in Java and Spring Boot with JWT admin auth, MySQL schema, Angular front end started, mock-ups in Figma.', tags: ['Java 11', 'Spring Boot', 'JWT', 'MySQL', 'Angular'] },
+  { period: '12/2022 — 01/2024', title: 'Co-founder, CEO / CTO', org: 'Blooming Group Ltd', body: 'International e-commerce company: long-term goals, compliance, coordination with clients, partners and suppliers, and custom Shopify storefronts in Liquid.', tags: ['E-commerce', 'Shopify / Liquid', 'Leadership'] },
+  { period: '2021 — 2024', title: 'Licence (Bachelor) in Computer Science', org: 'Université de Strasbourg', body: 'Algorithms, systems, networks, databases and software engineering; object-oriented apps and games in Java / JavaFX.', tags: ['C', 'Java', 'SQL', 'Systems'] },
   { period: '2023', title: 'First portfolio', org: 'Personal', body: 'Server-rendered PHP portfolio, where this site started.', tags: ['PHP', 'HTML/CSS'], link: 'https://github.com/A-Tlemcani/portfolio' },
   { period: '2022', title: 'MARS: MIPS assembly', org: 'Coursework', body: 'Low-level programs written in MIPS assembly and run on the MARS simulator: registers, memory, syscalls.', tags: ['Assembly', 'Computer architecture'], link: 'https://github.com/A-Tlemcani/mars' },
   { period: '2021', title: 'ChatBot', org: 'Personal', body: 'A JavaScript chatbot, my first interactive web project.', tags: ['JavaScript'], link: 'https://github.com/A-Tlemcani/ChatBot' },
 ];
 
 export const skills: Record<string, string[]> = {
-  'ServiceNow': ['Now Assist', 'AI Agents', 'Flow Designer', 'Script Includes', 'REST / OAuth', 'Platform Analytics', 'Instance Scan'],
-  'AI & automation': ['Claude Code', 'Agent orchestration', 'Python', 'Ollama / local LLMs', 'Letta', 'Prompt engineering', 'LLM-as-judge'],
-  Web: ['TypeScript', 'Astro', 'Three.js / WebGL', 'Vite', 'Accessibility', 'Playwright'],
-  'Back end & data': ['REST APIs', 'Node.js', 'Java', 'C# / .NET', 'SQL / MySQL', 'Microservices'],
-  'Delivery': ['Git / GitHub / GitLab', 'GitHub Actions', 'Docker', 'Linux', 'WireGuard', 'ArchiMate / UML'],
-  Certifications: ['ServiceNow CSA', 'AI Agents delivery accreditation', 'Now Assist for ITSM accreditation', 'TOEFL · English C1'], // VERIFY exact titles
+  'ServiceNow': ['Now Assist', 'AI Agents', 'Virtual Agent', 'Business Rules', 'Script Includes', 'UI Actions', 'Client Scripts', 'Flow Designer', 'REST / OAuth', 'Update Sets', 'ACLs', 'Platform Analytics', 'Instance Scan'],
+  'AI & automation': ['Claude Code', 'Multi-agent orchestration', 'Python', 'Ollama / local LLMs', 'Letta', 'Hermes', 'Prompt engineering', 'LLM-as-judge'],
+  Web: ['TypeScript', 'Astro', 'Three.js / WebGL', 'Vite', 'Angular', 'Accessibility', 'Playwright'],
+  'Back end & data': ['Java / Spring Boot', 'C# / .NET', 'REST APIs', 'JWT', 'MySQL', 'MongoDB', 'Postman'],
+  'Delivery': ['Git / GitHub / GitLab CI', 'GitHub Actions', 'Docker', 'Linux', 'Agile', 'ArchiMate / C4 / UML', 'Figma'],
+  Certifications: ['ServiceNow CSA', 'Delivery accreditation: AI Agents', 'Delivery accreditation: Now Assist for ITSM', 'Planned: CAD · ITSM', 'In progress: ServiceNow AI path', 'TOEFL · English C1'],
 };
 
 export const stats = [
