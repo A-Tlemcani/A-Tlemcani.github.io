@@ -64,9 +64,9 @@ function layers() {
 
 /** Per direction: build, exposure, and where the object sits (desktop / phone). */
 const looks = {
-  a: { build: monogram, exposure: 1.0, desk: [0, 1.15, 0.62], phone: [0, 1.25, 0.62] },
-  b: { build: knot, exposure: 1.1, desk: [1.75, 0, 1.0], phone: [0, 1.15, 0.7] },
-  c: { build: layers, exposure: 1.0, desk: [1.9, -0.1, 1.15], phone: [0.2, 1.1, 0.75] },
+  a: { build: monogram, exposure: 1.0, desk: [0, 1.2, 0.58], phone: [0, 1.3, 0.4] },
+  b: { build: knot, exposure: 1.1, desk: [1.75, 0, 1.0], phone: [0, 1.3, 0.42] },
+  c: { build: layers, exposure: 1.0, desk: [1.75, -0.1, 0.95], phone: [0, 1.3, 0.48] },
 } as const;
 
 /** Signature hero object: PBR materials lit by a studio HDRI, turning with scroll. */
