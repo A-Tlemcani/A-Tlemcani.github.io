@@ -5,8 +5,14 @@ import { href, org, period, tr, ui, type Locale } from '../i18n';
 import { SITE, certifications, home, marquee, meta, process, profile, services, stats, timeline } from '../data/site';
 import { project as p, projectIds } from '../data/projects';
 
-interface Props { locale: Locale }
-const { locale } = Astro.props;
+interface Props { locale: Locale; /** Design preview direction (/lab/ only). */ dir?: 'a' | 'b' | 'c' }
+const { locale, dir } = Astro.props;
+/** Lab only: moving media for the work chapters, where a recording exists in public/case/. */
+const motion: Record<string, { video?: string; img?: string }> = {
+  'dar-nila': { video: '/case/dar-nila/a-3d-glide.mp4' },
+  'jardin-vittorio': { img: '/case/jardin-vittorio/a-3d-wiggle.webp' },
+};
+const labCase = (path: string) => (dir && path === '/case/dar-nila/' ? `/lab/direction-${dir}${path}` : path);
 const t = ui[locale];
 const L = (x: { en: string; fr: string }) => tr(x, locale);
 const s = home.sections;
@@ -25,9 +31,9 @@ const jsonLd = {
   address: { '@type': 'PostalAddress', addressLocality: 'Strasbourg', addressCountry: 'FR' },
 };
 ---
-<Base locale={locale} title={L(meta.title)} description={L(meta.description)} jsonLd={jsonLd}>
+<Base locale={locale} title={L(meta.title)} description={L(meta.description)} jsonLd={jsonLd} dir={dir}>
   <section class="hero" data-webgl>
-    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <canvas id="hero-canvas" aria-hidden="true" data-dir={dir}></canvas>
     <div class="hero-inner">
       <p class="eyebrow"><span class="dot" aria-hidden="true"></span> {L(home.eyebrow)}</p>
       <h1 class="hero-title">{home.heroLines.map((l) => <span class="line" set:html={L(l)} />)}</h1>
@@ -45,11 +51,13 @@ const jsonLd = {
     <div class="scroll-hint" aria-hidden="true"><span></span></div>
   </section>
 
-  <section class="marquee" aria-label="Technologies">
-    <div class="marquee-track">
-      {[0, 1].map((pass) => marquee.map((m) => <span aria-hidden={pass ? 'true' : undefined}>{m}</span>))}
-    </div>
-  </section>
+  {!dir && (
+    <section class="marquee" aria-label="Technologies">
+      <div class="marquee-track">
+        {[0, 1].map((pass) => marquee.map((m) => <span aria-hidden={pass ? 'true' : undefined}>{m}</span>))}
+      </div>
+    </section>
+  )}
 
   <section class="section" id="work">
     <header class="section-head">
@@ -57,6 +65,34 @@ const jsonLd = {
       <h2>{L(s.work.title)}</h2>
       <p class="lead">{L(s.work.lead)}</p>
     </header>
+    {dir ? (
+      <div class="chapters">
+        {featured.map((id, i) => {
+          const w = p(id);
+          const page = href(locale, labCase(w.caseStudy ?? `/projects/${id}/`));
+          const m = motion[id] ?? {};
+          return (
+            <article class="chapter">
+              <a class="chapter-media" href={page} aria-label={`${w.title}: ${t.readMore}`} tabindex="-1">
+                {m.video
+                  ? <video src={m.video} poster={`/work/${id}.jpg`} muted loop playsinline preload="none" aria-hidden="true"></video>
+                  : <img src={m.img ?? `/work/${id}.jpg`} alt={`${w.title} screenshot`} loading="lazy" width="1280" height="800" />}
+              </a>
+              <div class="chapter-text">
+                <p class="chapter-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+                <p class="work-client">{L(w.client)}</p>
+                <h3><a class="plain" href={page}>{w.title}</a></h3>
+                <p class="chapter-sum">{L(w.summary)}</p>
+                <div class="work-links">
+                  <a class="btn btn-primary btn-sm" href={page}>{w.caseStudy ? t.caseStudy : t.readMore}</a>
+                  {w.live && <a class="btn btn-ghost btn-sm" href={w.live} {...ext}>{t.liveDemo}</a>}
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    ) : (
     <div class="work-grid">
       {featured.map((id, i) => {
         const w = p(id);
@@ -85,6 +121,7 @@ const jsonLd = {
         );
       })}
     </div>
+    )}
   </section>
 
   <section class="section" id="servicenow">

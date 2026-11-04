@@ -44,6 +44,7 @@ export const ui = {
     emailSubject: 'Project inquiry',
     startProject: 'Start a project',
     letsTalk: "Let's talk",
+    hdriCredit: 'Studio light: “Studio Small 09” by Sergej Majboroda, Poly Haven, CC0.',
   },
   fr: {
     skip: 'Aller au contenu',
@@ -65,5 +66,6 @@ export const ui = {
     emailSubject: 'Demande de projet',
     startProject: 'Démarrer un projet',
     letsTalk: 'Parlons-en',
+    hdriCredit: 'Éclairage studio : « Studio Small 09 » par Sergej Majboroda, Poly Haven, CC0.',
   },
 } as const;

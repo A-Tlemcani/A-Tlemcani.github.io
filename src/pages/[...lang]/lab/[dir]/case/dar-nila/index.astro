@@ -1,0 +1,12 @@
+---
+/** Design preview of the Dar Nila case study, one per direction. Not linked from the site, noindex. */
+import CaseStudy from '../../../../../../components/CaseStudy.astro';
+import '../../../../../../styles/lab.css';
+import { labPaths, type Dir } from '../../../../../../i18n/paths';
+import type { Locale } from '../../../../../../i18n';
+import { darNila } from '../../../../../../data/case-dar-nila';
+
+export const getStaticPaths = labPaths;
+const { locale, dir } = Astro.props as { locale: Locale; dir: Dir };
+---
+<CaseStudy locale={locale} id="dar-nila" c={darNila[locale]} dir={dir} />

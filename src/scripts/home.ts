@@ -29,6 +29,12 @@ if (clock) {
 // 3D hero, loaded after first paint so it never blocks content.
 const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement | null;
 if (canvas) {
-  const start = () => import('./hero').then((m) => m.initHero(canvas));
+  const dir = canvas.dataset.dir;
+  const start = () => (dir
+    ? import('./lab/object').then((m) => m.initObject(canvas, dir))
+    : import('./hero').then((m) => m.initHero(canvas)));
   'requestIdleCallback' in window ? requestIdleCallback(start, { timeout: 1200 }) : setTimeout(start, 200);
 }
+
+// Design previews (/lab/): work chapters carry muted video loops.
+if (document.documentElement.dataset.dir) import('./case');

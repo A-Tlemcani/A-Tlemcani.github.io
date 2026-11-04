@@ -25,13 +25,13 @@ export interface CaseCopy {
   decisionsTitle: string;
   skillsTitle: string;
 }
-interface Props { locale: Locale; id: ProjectId; c: CaseCopy }
-const { locale, id, c } = Astro.props;
+interface Props { locale: Locale; id: ProjectId; c: CaseCopy; dir?: 'a' | 'b' | 'c' }
+const { locale, id, c, dir } = Astro.props;
 const t = ui[locale];
 const pr = project(id);
 const decs = decisionsForProject(id);
 ---
-<Base locale={locale} title={c.title} description={c.description} image={`/work/${id}.jpg`}>
+<Base locale={locale} title={c.title} description={c.description} image={`/work/${id}.jpg`} dir={dir}>
   <section class="case-hero">
     <p class="eyebrow">{c.eyebrow}</p>
     <h1>{pr.title}</h1>

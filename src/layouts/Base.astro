@@ -15,8 +15,10 @@ interface Props {
   image?: string;
   /** Structured data for search engines (JSON-LD). */
   jsonLd?: object;
+  /** Design preview (/lab/): sets data-dir on <html> and keeps the page out of search engines. */
+  dir?: 'a' | 'b' | 'c';
 }
-const { locale, title, description, image = '/og.jpg', jsonLd } = Astro.props;
+const { locale, title, description, image = '/og.jpg', jsonLd, dir } = Astro.props;
 const t = ui[locale];
 const alt = altPath(Astro.url.pathname);
 const other: Locale = locale === 'en' ? 'fr' : 'en';
@@ -44,12 +46,13 @@ const commands = [
 ];
 ---
 <!doctype html>
-<html lang={locale}>
+<html lang={locale} data-dir={dir}>
   <head>
     <meta charset="UTF-8" />
     {import.meta.env.PROD && <meta http-equiv="Content-Security-Policy" content={csp} />}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
+    {dir && <meta name="robots" content="noindex" />}
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#07080c" />
@@ -84,12 +87,18 @@ const commands = [
       </div>
     </header>
 
+    {dir && (
+      <nav class="lab-switch" aria-label="Design directions">
+        {(['a', 'b', 'c'] as const).map((d) => <a href={href(locale, `/lab/direction-${d}/`)} aria-current={d === dir ? 'page' : undefined}>{d.toUpperCase()}</a>)}
+      </nav>
+    )}
     <main id="main">
       <slot />
     </main>
 
     <footer class="footer">
       <p>© {new Date().getFullYear()} {profile.name}. {t.footer}</p>
+      {dir && <p>{t.hdriCredit}</p>}
       <a href="#top">{t.backTop}</a>
     </footer>
 
