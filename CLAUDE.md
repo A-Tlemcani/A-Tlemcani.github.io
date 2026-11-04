@@ -1,6 +1,6 @@
 # Abderrahman Tlemcani — Portfolio — notes for Claude Code sessions
 
-Personal portfolio of Abderrahman Tlemcani: software & cloud engineer building immersive 3D web experiences.
+Personal portfolio of Abderrahman Tlemcani: ServiceNow & AI developer who also builds immersive 3D web experiences.
 
 ## Stack
 Vite 8 + TypeScript (strict) + Three.js, no framework. Static build in `dist/`, deployed by `.github/workflows/deploy.yml` to GitHub Pages (https://a-tlemcani.github.io/).

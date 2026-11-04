@@ -1,6 +1,6 @@
 # a-tlemcani.github.io
 
-Personal portfolio of **Abderrahman Tlemcani**: software & cloud engineer building immersive 3D web experiences and the platforms behind them.
+Personal portfolio of **Abderrahman Tlemcani**: ServiceNow & AI developer who also builds immersive 3D web experiences and the platforms behind them.
 
 **Live → [a-tlemcani.github.io](https://a-tlemcani.github.io/)**
 
