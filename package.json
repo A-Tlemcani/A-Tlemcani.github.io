@@ -2,26 +2,27 @@
   "name": "a-tlemcani.github.io",
   "private": true,
   "version": "1.0.0",
-  "description": "Personal portfolio of Abderrahman Tlemcani: software & cloud engineer building immersive 3D web experiences.",
+  "description": "Personal portfolio of Abderrahman Tlemcani: ServiceNow & AI developer who also builds immersive 3D web experiences.",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "typecheck": "tsc --noEmit",
-    "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "dev": "astro dev",
+    "check": "astro check",
+    "build": "astro check && astro build && node scripts/check-links.mjs",
+    "preview": "astro preview"
   },
   "dependencies": {
     "@fontsource-variable/inter": "5.3.0",
     "@fontsource-variable/jetbrains-mono": "5.3.0",
     "@fontsource-variable/space-grotesk": "5.3.0",
+    "astro": "7.4.1",
     "three": "0.186.1"
   },
   "devDependencies": {
+    "@astrojs/check": "0.9.11",
     "@types/three": "0.186.0",
-    "typescript": "5.9.3",
-    "vite": "8.3.4"
+    "typescript": "5.9.3"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.22.0"
   }
 }

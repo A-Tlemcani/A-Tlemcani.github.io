@@ -1,0 +1,44 @@
+---
+import Doc from '../../../components/Doc.astro';
+import Level from '../../../components/Level.astro';
+import { href, locales, period, type Locale } from '../../../i18n';
+import { groups, skills, skillIds, tiers, type SkillId, type Skill } from '../../../data/skills';
+import { evidenceFor, kinds, project } from '../../../data/projects';
+import { decisions, decisionsForSkill } from '../../../data/decisions';
+
+export const getStaticPaths = () => locales.flatMap((l) => skillIds.map((id) => ({
+  params: { lang: l === 'en' ? undefined : l, id }, props: { locale: l, id },
+})));
+const { locale, id } = Astro.props as { locale: Locale; id: SkillId };
+const s: Skill = skills[id];
+const proof = evidenceFor(id);
+const decs = decisionsForSkill(id);
+const c = {
+  en: { all: 'Skills', level: 'Level', tier: 'How I deliver it', proof: 'Where it is proven', none: 'No public project yet.', decisions: 'Decisions that use it' },
+  fr: { all: 'Compétences', level: 'Niveau', tier: 'Comment je la livre', proof: 'Où c’est prouvé', none: 'Pas encore de projet public.', decisions: 'Décisions qui l’utilisent' },
+}[locale];
+---
+<Doc locale={locale} title={s.name} description={s.summary[locale]} eyebrow={groups[s.group][locale]} crumbs={[[c.all, '/skills/']]}>
+  <dl slot="head" class="facts">
+    <div><dt>{c.level}</dt><dd><Level locale={locale} level={s.level} /></dd></div>
+    <div><dt>{c.tier}</dt><dd><span class="tier-badge" data-tier={s.tier}>{tiers[s.tier].name[locale]}</span></dd></div>
+  </dl>
+  <section class="doc-block">
+    <h2>{c.tier}</h2>
+    <p>{tiers[s.tier].body[locale]}</p>
+  </section>
+  <section class="doc-block">
+    <h2>{c.proof}</h2>
+    {proof.length === 0 ? <p>{c.none}</p> : (
+      <ul class="link-list">
+        {proof.map((p) => <li><a href={href(locale, `/projects/${p}/`)}>{project(p).title}</a> <span class="muted">· {kinds[project(p).kind][locale]} · {period(project(p).period, locale)}</span></li>)}
+      </ul>
+    )}
+  </section>
+  {decs.length > 0 && (
+    <section class="doc-block">
+      <h2>{c.decisions}</h2>
+      <ul class="link-list">{decs.map((d) => <li><a href={href(locale, `/decisions/${d}/`)}>{decisions[d].title[locale]}</a></li>)}</ul>
+    </section>
+  )}
+</Doc>

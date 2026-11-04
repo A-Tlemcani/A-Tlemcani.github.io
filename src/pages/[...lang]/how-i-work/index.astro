@@ -1,0 +1,80 @@
+---
+import Doc from '../../../components/Doc.astro';
+import { href, type Locale } from '../../../i18n';
+import { langPaths } from '../../../i18n/paths';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props as { locale: Locale };
+const c = {
+  en: {
+    title: 'How I work with AI',
+    eyebrow: 'Method',
+    summary: 'I am an engineer who leads AI-assisted delivery. An AI coding agent writes much of the code; I own the brief, the architecture, the review and the result. Here is exactly who does what.',
+    stepsTitle: 'From brief to delivery',
+    steps: [
+      ['Brief & decisions', 'Me', 'I talk with you, write the brief and decide the architecture. Choices are written down as short decision records, in my words.'],
+      ['Rules for the agent', 'Me', 'Each project has written rules: stack, conventions, security limits, performance budgets, what never goes in the code.'],
+      ['Implementation', 'AI agent, directed by me', 'Claude Code implements one small task at a time, on a branch. I steer, correct and reject.'],
+      ['Review & checks', 'Me + automation', 'I read every change. CI builds it, runs the tests, audits dependencies and enforces the CSP; browser tests check what you will actually see.'],
+      ['Delivery & care', 'Me', 'I ship, document, and stay responsible for it afterwards.'],
+    ],
+    neverTitle: 'What I never delegate',
+    never: [
+      'Architecture and security decisions.',
+      'Talking with you, and what we agree.',
+      'The final review of anything that ships.',
+      'Your confidential data: it does not go into an AI tool without your written OK.',
+    ],
+    whyTitle: 'Why tell you this',
+    why: 'Because it changes what you get: the speed of a small team, with one engineer accountable for every line. And because you should know how the work is made before you pay for it. This site, its demos and the client work are built exactly this way.',
+    links: [['The decision behind this', '/decisions/ai-assisted-delivery/'], ['What I do myself, and with partners', '/skills/'], ['Every decision record', '/decisions/']],
+    who: 'Who',
+  },
+  fr: {
+    title: 'Comment je travaille avec l’IA',
+    eyebrow: 'Méthode',
+    summary: 'Je suis un ingénieur qui pilote une production assistée par IA. Un agent de code IA écrit une bonne partie du code ; je suis responsable du brief, de l’architecture, de la relecture et du résultat. Voici exactement qui fait quoi.',
+    stepsTitle: 'Du brief à la livraison',
+    steps: [
+      ['Brief & décisions', 'Moi', 'J’échange avec vous, j’écris le brief et je décide de l’architecture. Les choix sont consignés dans de courtes fiches de décision, avec mes mots.'],
+      ['Règles pour l’agent', 'Moi', 'Chaque projet a des règles écrites : stack, conventions, limites de sécurité, budgets de performance, ce qui ne doit jamais entrer dans le code.'],
+      ['Implémentation', 'Agent IA, piloté par moi', 'Claude Code implémente une petite tâche à la fois, sur une branche. Je dirige, je corrige et je refuse.'],
+      ['Relecture & contrôles', 'Moi + automatisation', 'Je relis chaque changement. La CI construit, lance les tests, audite les dépendances et applique la CSP ; des tests navigateur vérifient ce que vous verrez réellement.'],
+      ['Livraison & suivi', 'Moi', 'Je livre, je documente, et j’en reste responsable ensuite.'],
+    ],
+    neverTitle: 'Ce que je ne délègue jamais',
+    never: [
+      'Les décisions d’architecture et de sécurité.',
+      'L’échange avec vous, et ce que nous convenons.',
+      'La relecture finale de tout ce qui est livré.',
+      'Vos données confidentielles : elles n’entrent dans aucun outil d’IA sans votre accord écrit.',
+    ],
+    whyTitle: 'Pourquoi vous le dire',
+    why: 'Parce que ça change ce que vous obtenez : la vitesse d’une petite équipe, avec un seul ingénieur responsable de chaque ligne. Et parce que vous devez savoir comment le travail est fait avant de le payer. Ce site, ses démos et les projets clients sont construits exactement ainsi.',
+    links: [['La décision derrière cette méthode', '/decisions/ai-assisted-delivery/'], ['Ce que je fais moi-même, et avec des partenaires', '/skills/'], ['Toutes les fiches de décision', '/decisions/']],
+    who: 'Qui',
+  },
+}[locale];
+---
+<Doc locale={locale} title={c.title} description={c.summary} eyebrow={c.eyebrow}>
+  <section class="doc-block">
+    <h2>{c.stepsTitle}</h2>
+    <ol class="steps">
+      {c.steps.map(([step, who, body], i) => (
+        <li>
+          <span class="step-n">0{i + 1}</span>
+          <div><h3>{step}</h3><p class="who"><span class="muted">{c.who}:</span> {who}</p><p>{body}</p></div>
+        </li>
+      ))}
+    </ol>
+  </section>
+  <section class="doc-block">
+    <h2>{c.neverTitle}</h2>
+    <ul class="arrow-list">{c.never.map((n) => <li>{n}</li>)}</ul>
+  </section>
+  <section class="doc-block">
+    <h2>{c.whyTitle}</h2>
+    <p>{c.why}</p>
+    <ul class="link-list">{c.links.map(([label, path]) => <li><a href={href(locale, path)}>{label} →</a></li>)}</ul>
+  </section>
+</Doc>

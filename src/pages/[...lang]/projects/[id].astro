@@ -1,0 +1,48 @@
+---
+import Doc from '../../../components/Doc.astro';
+import SkillTags from '../../../components/SkillTags.astro';
+import { href, locales, period, ui, type Locale } from '../../../i18n';
+import { kinds, project, projectIds, type ProjectId } from '../../../data/projects';
+import { decisions, decisionsForProject } from '../../../data/decisions';
+
+export const getStaticPaths = () => locales.flatMap((l) => projectIds.map((id) => ({
+  params: { lang: l === 'en' ? undefined : l, id }, props: { locale: l, id },
+})));
+const { locale, id } = Astro.props as { locale: Locale; id: ProjectId };
+const t = ui[locale];
+const p = project(id);
+const decs = decisionsForProject(id);
+const lbl = {
+  en: { work: 'Work', built: 'What was built', outcome: 'Where it stands', skills: 'Skills it proves', decisions: 'Decisions', anon: 'Described generically: no internal names, customers or confidential detail.' },
+  fr: { work: 'Réalisations', built: 'Ce qui a été construit', outcome: 'Où en est le projet', skills: 'Compétences démontrées', decisions: 'Décisions', anon: 'Décrit de façon générique : aucun nom interne, client ou détail confidentiel.' },
+}[locale];
+const ext = { target: '_blank', rel: 'noopener noreferrer' };
+---
+<Doc locale={locale} title={p.title} description={p.summary[locale]} eyebrow={`${kinds[p.kind][locale]} · ${period(p.period, locale)} · ${p.client[locale]}`} crumbs={[[lbl.work, '/#work']]} image={p.featured ? `/work/${id}.jpg` : undefined}>
+  <div slot="head" class="doc-actions">
+    {p.caseStudy && <a class="btn btn-primary btn-sm" href={href(locale, p.caseStudy)}>{t.caseStudy}</a>}
+    {p.live && <a class="btn btn-primary btn-sm" href={p.live} {...ext}>{t.liveDemo}</a>}
+    {p.repo && <a class="btn btn-ghost btn-sm" href={p.repo} {...ext}>{t.viewRepo}</a>}
+    {p.note && <span class="work-note">{p.note[locale]}</span>}
+  </div>
+  {p.featured && <img class="doc-shot" src={`/work/${id}.jpg`} alt={`${p.title} screenshot`} width="1280" height="800" />}
+  <section class="doc-block">
+    <h2>{lbl.built}</h2>
+    <ul class="arrow-list">{p.built.map((b) => <li>{b[locale]}</li>)}</ul>
+  </section>
+  <section class="doc-block">
+    <h2>{lbl.outcome}</h2>
+    <p>{p.outcome[locale]}</p>
+    {p.kind === 'servicenow' && <p class="fine">{lbl.anon}</p>}
+  </section>
+  <section class="doc-block">
+    <h2>{lbl.skills}</h2>
+    <SkillTags locale={locale} ids={p.skills} />
+  </section>
+  {decs.length > 0 && (
+    <section class="doc-block">
+      <h2>{lbl.decisions}</h2>
+      <ul class="link-list">{decs.map((d) => <li><a href={href(locale, `/decisions/${d}/`)}>{decisions[d].title[locale]}</a></li>)}</ul>
+    </section>
+  )}
+</Doc>

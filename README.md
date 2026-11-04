@@ -1,27 +1,41 @@
 # a-tlemcani.github.io
 
-Personal portfolio of **Abderrahman Tlemcani**: ServiceNow & AI developer who also builds immersive 3D web experiences and the platforms behind them.
+Personal portfolio of **Abderrahman Tlemcani**: ServiceNow & AI developer who also builds immersive 3D web experiences.
 
-**Live → [a-tlemcani.github.io](https://a-tlemcani.github.io/)**
+**Live → [a-tlemcani.github.io](https://a-tlemcani.github.io/)** · English at `/`, French at `/fr/`
 
 ![Portfolio](public/og.jpg)
 
 ## What's inside
-- **GPU particle hero:** 22k points (9k on mobile) displaced by simplex noise in a vertex shader, pointer parallax, and a scroll-driven morph from sphere to ring. Three.js loads lazily after first paint.
-- **Selected work** (first tier): Dar Nila (riad showcase with Gaussian-splat scans), Jardin Vittorio (client direct-booking site, Marrakech), and two open demos:
-  | Demo | What it shows |
-  | --- | --- |
-  | [Atelier Nord](https://github.com/A-Tlemcani/atelier-3d-configurator) | 3D product configurator, shareable links, cart |
-  | [Orbit](https://github.com/A-Tlemcani/orbit-saas-landing) | SaaS landing, WebGL globe, pricing |
-- **Systems & AI lab** (second tier): Digital Brain, Content Factory, flight alerts
-- Services, process, experience timeline and skills, all driven by `src/content.ts`
-- ⌘K / Ctrl+K command palette, reduced-motion support, no trackers, no cookies
+- **Home:** GPU particle hero (22k points, 9k on mobile, simplex noise in a vertex shader, lazy-loaded after first paint), selected work, ServiceNow work, AI lab, services, experience, standards, contact.
+- **Explore pages**, all cross-linked and in both languages:
+  - `/skills/` — every skill with an honest 1–5 level and a delivery tier (*I build it* · *hands-on, growing* · *with trusted partners*), each linking to the projects that prove it.
+  - `/projects/<id>/` — what was built, where it stands, the skills it proves, the decisions behind it.
+  - `/decisions/<id>/` — short decision records: context, choice, why, what it costs.
+  - `/how-i-work/` — exactly who does what in AI-assisted delivery.
+  - `/servicenow/` — the platform in plain words, my role, generic case studies, certifications.
+- Case studies: Dar Nila and Jardin Vittorio, with interactive previews in `public/previews/`.
+- ⌘K / Ctrl+K quick navigation across every page, reduced-motion support, no trackers, no cookies.
 
 ## Engineering
-Vite 8 · TypeScript strict · Three.js · self-hosted variable fonts · strict CSP injected at build · GitHub Actions → Pages · Dependabot with a 14-day cooldown · `npm audit` gate. SEO routines live in [`seo/`](seo/README.md).
+Astro 7 (static, zero JS by default) · TypeScript strict · Three.js · self-hosted variable fonts · strict CSP on every page · GitHub Actions → Pages · Dependabot with a 14-day cooldown · `npm audit` gate.
+
+The build fails if anything breaks the rules:
+- `astro check` type-checks pages and data. Links between skills, projects and decisions are typed ids, so a dangling one does not compile.
+- `scripts/check-links.mjs` walks the built site: every internal link and asset must exist, every page must carry the CSP, and no inline script or style is allowed.
+
+SEO routines live in [`seo/`](seo/README.md).
 
 ## Editing content
-Everything you read on the site is in [`src/content.ts`](src/content.ts). Lines marked `// VERIFY` need a human check, and `profile.email` / `linkedin` are empty on purpose so nothing personal is published by default.
+All copy lives in typed data files, each text written in English and French:
+
+| File | What |
+| --- | --- |
+| `src/data/site.ts` | profile, home page copy, services, timeline, stats |
+| `src/data/skills.ts` | skills, levels, tiers |
+| `src/data/projects.ts` | projects (evidence for skills) |
+| `src/data/decisions.ts` | decision records |
+| `src/pages/[...lang]/case/*` | the two long case studies |
 
 ```bash
 npm ci --ignore-scripts && npm run dev

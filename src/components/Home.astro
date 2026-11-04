@@ -1,0 +1,221 @@
+---
+import Base from '../layouts/Base.astro';
+import SkillTags from './SkillTags.astro';
+import { href, org, period, tr, ui, type Locale } from '../i18n';
+import { SITE, certifications, home, marquee, meta, process, profile, services, stats, timeline } from '../data/site';
+import { project as p, projectIds } from '../data/projects';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = ui[locale];
+const L = (x: { en: string; fr: string }) => tr(x, locale);
+const s = home.sections;
+
+const featured = projectIds.filter((id) => p(id).featured);
+const sn = projectIds.filter((id) => p(id).kind === 'servicenow');
+const lab = projectIds.filter((id) => p(id).kind === 'lab');
+const ext = { target: '_blank', rel: 'noopener noreferrer' };
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'Person', name: profile.name, jobTitle: L(meta.jobTitle), url: href(locale, '/') === '/' ? `${SITE}/` : `${SITE}/fr/`,
+  sameAs: [profile.github, profile.linkedin], email: `mailto:${profile.email}`,
+  alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'CESI' }, { '@type': 'CollegeOrUniversity', name: 'Université de Strasbourg' }],
+  knowsLanguage: ['fr', 'ar', 'en'],
+  knowsAbout: ['ServiceNow', 'Now Assist', 'AI agents', 'AI automation', 'Python', 'TypeScript', 'Three.js', 'WebGL'],
+  address: { '@type': 'PostalAddress', addressLocality: 'Strasbourg', addressCountry: 'FR' },
+};
+---
+<Base locale={locale} title={L(meta.title)} description={L(meta.description)} jsonLd={jsonLd}>
+  <section class="hero" data-webgl>
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span> {L(home.eyebrow)}</p>
+      <h1 class="hero-title">{home.heroLines.map((l) => <span class="line" set:html={L(l)} />)}</h1>
+      <p class="hero-sub">{L(home.heroSub)}</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#work">{L(home.ctaWork)}</a>
+        <a class="btn btn-ghost" href="#contact">{t.startProject}</a>
+      </div>
+    </div>
+    <dl class="hero-meta">
+      <div><dt>{L(home.based)}</dt><dd>Strasbourg · <span id="local-time">--:--</span> {L(home.parisTime)}</dd></div>
+      <div><dt>{L(home.focus)}</dt><dd>ServiceNow · AI · Web</dd></div>
+      <div><dt>{L(home.languages)}</dt><dd>Français · <span lang="ar">العربية</span> · English</dd></div>
+    </dl>
+    <div class="scroll-hint" aria-hidden="true"><span></span></div>
+  </section>
+
+  <section class="marquee" aria-label="Technologies">
+    <div class="marquee-track">
+      {[0, 1].map((pass) => marquee.map((m) => <span aria-hidden={pass ? 'true' : undefined}>{m}</span>))}
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <header class="section-head">
+      <p class="eyebrow">{L(s.work.eyebrow)}</p>
+      <h2>{L(s.work.title)}</h2>
+      <p class="lead">{L(s.work.lead)}</p>
+    </header>
+    <div class="work-grid">
+      {featured.map((id, i) => {
+        const w = p(id);
+        const [a, b] = w.featured!;
+        const page = href(locale, w.caseStudy ?? `/projects/${id}/`);
+        return (
+          <article class="work-card" data-a={a} data-b={b}>
+            <a class="work-visual" href={page} aria-label={`${w.title}: ${t.readMore}`}>
+              <img src={`/work/${id}.jpg`} alt={`${w.title} screenshot`} loading="lazy" width="1280" height="800" />
+              <span class="work-index">{String(i + 1).padStart(2, '0')}</span>
+            </a>
+            <div class="work-body">
+              <p class="work-client">{L(w.client)}</p>
+              <h3><a class="plain" href={page}>{w.title}</a></h3>
+              <p>{L(w.summary)}</p>
+              <ul class="work-outcomes">{w.built.map((o) => <li>{L(o)}</li>)}</ul>
+              <SkillTags locale={locale} ids={w.skills} />
+              <div class="work-links">
+                {w.caseStudy && <a class="btn btn-primary btn-sm" href={page}>{t.caseStudy}</a>}
+                {w.live && <a class="btn btn-primary btn-sm" href={w.live} {...ext}>{t.liveDemo}</a>}
+                {!w.caseStudy && <a class="btn btn-ghost btn-sm" href={page}>{t.readMore}</a>}
+                {w.note && <p class="work-note">{L(w.note)}</p>}
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="section" id="servicenow">
+    <header class="section-head">
+      <p class="eyebrow">{L(s.servicenow.eyebrow)}</p>
+      <h2>{L(s.servicenow.title)}</h2>
+      <p class="lead">{L(s.servicenow.lead)}</p>
+    </header>
+    <div class="lab-grid">
+      {sn.map((id) => (
+        <article class="lab-card">
+          <p class="work-client">{period(p(id).period, locale)} · {L(p(id).client)}</p>
+          <h3><a class="plain" href={href(locale, `/projects/${id}/`)}>{p(id).title}</a></h3>
+          <p>{L(p(id).summary)}</p>
+          <SkillTags locale={locale} ids={p(id).skills.slice(0, 3)} />
+        </article>
+      ))}
+    </div>
+    <p class="more"><a href={href(locale, '/servicenow/')}>{L(s.servicenow.more)}</a></p>
+  </section>
+
+  <section class="section" id="systems">
+    <header class="section-head">
+      <p class="eyebrow">{L(s.lab.eyebrow)}</p>
+      <h2>{L(s.lab.title)}</h2>
+      <p class="lead">{L(s.lab.lead)}</p>
+    </header>
+    <div class="lab-grid">
+      {lab.map((id) => (
+        <article class="lab-card">
+          <p class="work-client">{L(p(id).client)}</p>
+          <h3><a class="plain" href={href(locale, `/projects/${id}/`)}>{p(id).title}</a></h3>
+          <p>{L(p(id).summary)}</p>
+          <SkillTags locale={locale} ids={p(id).skills} />
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <header class="section-head">
+      <p class="eyebrow">{L(s.services.eyebrow)}</p>
+      <h2>{L(s.services.title)}</h2>
+      <p class="lead">{L(s.services.lead)}</p>
+    </header>
+    <div class="services">
+      {services.map((sv) => (
+        <article class="service">
+          <h3>{L(sv.title)}</h3>
+          <p>{L(sv.body)}</p>
+          <SkillTags locale={locale} ids={sv.skills} />
+        </article>
+      ))}
+    </div>
+    <p class="more"><a href={href(locale, '/skills/')}>{L(s.services.allSkills)}</a> <a href={href(locale, '/how-i-work/')}>{L(s.services.how)}</a></p>
+    <ol class="process">
+      {process.map((st, i) => <li><span class="step-n">0{i + 1}</span><strong>{L(st.step)}</strong><p>{L(st.body)}</p></li>)}
+    </ol>
+  </section>
+
+  <section class="section" id="experience">
+    <header class="section-head">
+      <p class="eyebrow">{L(s.experience.eyebrow)}</p>
+      <h2>{L(s.experience.title)}</h2>
+    </header>
+    <div class="exp-layout">
+      <ol class="timeline">
+        {timeline.map((item) => {
+          if ('project' in item) {
+            const pr = p(item.project);
+            return (
+              <li class="tl-item">
+                <p class="tl-period">{period(pr.period, locale)}</p>
+                <div>
+                  <h3><a class="plain" href={href(locale, `/projects/${item.project}/`)}>{item.title ? L(item.title) : pr.title}</a> <span class="tl-org">· {item.org ? org(item.org, locale) : L(pr.client)}</span></h3>
+                  <p>{L(pr.summary)}</p>
+                  <SkillTags locale={locale} ids={pr.skills} />
+                </div>
+              </li>
+            );
+          }
+          return (
+            <li class="tl-item">
+              <p class="tl-period">{period(item.period, locale)}</p>
+              <div>
+                <h3>{L(item.title)} <span class="tl-org">· {org(item.org, locale)}</span></h3>
+                <p>{L(item.body)}</p>
+                <SkillTags locale={locale} ids={item.skills} />
+                {item.link && <a class="tl-link" href={item.link} {...ext}>{t.viewRepo}</a>}
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+      <aside class="skills" aria-label={L(home.certificationsTitle)}>
+        <div class="skill-group">
+          <h3>{L(home.certificationsTitle)}</h3>
+          <ul class="cert-list">{certifications.map((c) => <li>{L(c)}</li>)}</ul>
+        </div>
+        <a class="btn btn-ghost btn-sm" href={href(locale, '/skills/')}>{L(s.services.allSkills)}</a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="standards">
+    <header class="section-head">
+      <p class="eyebrow">{L(s.standards.eyebrow)}</p>
+      <h2>{L(s.standards.title)}</h2>
+    </header>
+    <div class="stats" id="stats">
+      {stats.map((st) => (
+        <div class="stat">
+          <p class="stat-value" data-to={st.value} data-suffix={st.suffix}>{st.value}{st.suffix}</p>
+          <p class="stat-label">{L(st.label)}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section contact" id="contact">
+    <p class="eyebrow">{L(s.contact.eyebrow)}</p>
+    <h2 class="contact-title" set:html={L(s.contact.title)} />
+    <p class="lead">{L(s.contact.lead)}</p>
+    <div class="contact-actions">
+      <a class="btn btn-primary btn-lg" href={`mailto:${profile.email}?subject=${encodeURIComponent(t.emailSubject)}`}>{t.emailMe}</a>
+      <a class="btn btn-ghost btn-lg" href={profile.github} {...ext}>GitHub ↗</a>
+      <a class="btn btn-ghost btn-lg" href={profile.linkedin} {...ext}>LinkedIn ↗</a>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import '../scripts/home';
+</script>

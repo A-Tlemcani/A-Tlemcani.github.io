@@ -1,0 +1,29 @@
+---
+import Doc from '../../../components/Doc.astro';
+import SkillTags from '../../../components/SkillTags.astro';
+import { href, locales, type Locale } from '../../../i18n';
+import { project } from '../../../data/projects';
+import { decisions, decisionIds, type DecisionId, type Decision } from '../../../data/decisions';
+
+export const getStaticPaths = () => locales.flatMap((l) => decisionIds.map((id) => ({
+  params: { lang: l === 'en' ? undefined : l, id }, props: { locale: l, id },
+})));
+const { locale, id } = Astro.props as { locale: Locale; id: DecisionId };
+const d: Decision = decisions[id];
+const lbl = {
+  en: { eyebrow: 'Decision record', all: 'Decisions', context: 'Context', why: 'Why', tradeoff: 'What it costs', skills: 'Skills involved', projects: 'Where it applies' },
+  fr: { eyebrow: 'Décision d’architecture', all: 'Décisions', context: 'Contexte', why: 'Pourquoi', tradeoff: 'Ce que ça coûte', skills: 'Compétences en jeu', projects: 'Où elle s’applique' },
+}[locale];
+---
+<Doc locale={locale} title={d.title[locale]} description={d.decision[locale]} eyebrow={lbl.eyebrow} crumbs={[[lbl.all, '/decisions/']]}>
+  <section class="doc-block"><h2>{lbl.context}</h2><p>{d.context[locale]}</p></section>
+  <section class="doc-block"><h2>{lbl.why}</h2><ul class="arrow-list">{d.why.map((w) => <li>{w[locale]}</li>)}</ul></section>
+  <section class="doc-block"><h2>{lbl.tradeoff}</h2><p>{d.tradeoff[locale]}</p></section>
+  <section class="doc-block"><h2>{lbl.skills}</h2><SkillTags locale={locale} ids={d.skills} /></section>
+  {d.projects.length > 0 && (
+    <section class="doc-block">
+      <h2>{lbl.projects}</h2>
+      <ul class="link-list">{d.projects.map((p) => <li><a href={href(locale, `/projects/${p}/`)}>{project(p).title}</a></li>)}</ul>
+    </section>
+  )}
+</Doc>

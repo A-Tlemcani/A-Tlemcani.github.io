@@ -1,0 +1,63 @@
+---
+import Doc from '../../../components/Doc.astro';
+import Level from '../../../components/Level.astro';
+import { href, type Locale } from '../../../i18n';
+import { langPaths } from '../../../i18n/paths';
+import { groups, skills, skillIds, tiers, type Group, type Tier } from '../../../data/skills';
+import { evidenceFor } from '../../../data/projects';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props as { locale: Locale };
+const c = {
+  en: {
+    title: 'Skills, levels and who does what',
+    eyebrow: 'Skills',
+    summary: 'Every skill with an honest level from 1 to 5, the way I deliver it (myself, growing, or with a partner), and links to the projects that prove it.',
+    scaleTitle: 'How to read the levels',
+    scale: 'The scale is the one my employer uses: 1 fundamentals, 2 novice, 3 intermediate, 4 advanced, 5 expert. I start from my own assessment there and only raise a level when a project shows it. I am early in my career; the levels say so.',
+    proof: (n: number) => (n === 1 ? '1 project' : `${n} projects`),
+  },
+  fr: {
+    title: 'Compétences, niveaux et qui fait quoi',
+    eyebrow: 'Compétences',
+    summary: 'Chaque compétence avec un niveau honnête de 1 à 5, la façon dont je la livre (moi-même, en progression, ou avec un partenaire), et les projets qui la prouvent.',
+    scaleTitle: 'Lire les niveaux',
+    scale: 'L’échelle est celle de mon employeur : 1 notions, 2 novice, 3 intermédiaire, 4 avancé, 5 expert. Je pars de mon auto-évaluation et je ne monte un niveau que lorsqu’un projet le démontre. Je suis en début de carrière ; les niveaux le disent.',
+    proof: (n: number) => (n === 1 ? '1 projet' : `${n} projets`),
+  },
+}[locale];
+const tierOrder: Tier[] = ['build', 'growing', 'partner'];
+const groupOrder = Object.keys(groups) as Group[];
+---
+<Doc locale={locale} title={c.title} description={c.summary} eyebrow={c.eyebrow}>
+  <section class="tiers">
+    {tierOrder.map((tier) => (
+      <div class="tier" data-tier={tier}>
+        <h2>{tiers[tier].name[locale]}</h2>
+        <p>{tiers[tier].body[locale]}</p>
+      </div>
+    ))}
+  </section>
+  <section class="doc-block">
+    <h2>{c.scaleTitle}</h2>
+    <p>{c.scale}</p>
+  </section>
+  {groupOrder.map((g) => {
+    const ids = skillIds.filter((id) => skills[id].group === g);
+    return ids.length > 0 && (
+      <section class="skill-table">
+        <h2>{groups[g][locale]}</h2>
+        <ul>
+          {ids.map((id) => (
+            <li>
+              <a href={href(locale, `/skills/${id}/`)}>{skills[id].name}</a>
+              <Level locale={locale} level={skills[id].level} />
+              <span class="tier-badge" data-tier={skills[id].tier}>{tiers[skills[id].tier].name[locale]}</span>
+              <span class="proof">{c.proof(evidenceFor(id).length)}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    );
+  })}
+</Doc>

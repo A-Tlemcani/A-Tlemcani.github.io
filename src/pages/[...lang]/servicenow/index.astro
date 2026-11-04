@@ -1,0 +1,67 @@
+---
+import Doc from '../../../components/Doc.astro';
+import SkillTags from '../../../components/SkillTags.astro';
+import { href, period, type Locale } from '../../../i18n';
+import { langPaths } from '../../../i18n/paths';
+import { project, projectIds } from '../../../data/projects';
+import { certifications } from '../../../data/site';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props as { locale: Locale };
+const sn = projectIds.filter((id) => project(id).kind === 'servicenow');
+const c = {
+  en: {
+    title: 'ServiceNow & AI agents',
+    eyebrow: 'ServiceNow',
+    summary: 'I am a ServiceNow developer at Atos, in an innovation team that prototypes AI on the platform. CSA certified, with two delivery accreditations on AI Agents and Now Assist.',
+    whatTitle: 'ServiceNow in one paragraph',
+    what: 'ServiceNow is the platform large companies use to run IT and business workflows: tickets, requests, approvals, assets, HR. Everything is data and scripts on one platform, so a change in one place reaches the whole company. Its AI layer, Now Assist and AI Agents, can summarise, suggest and act inside those workflows. My work is making that AI useful and safe in practice.',
+    roleTitle: 'What I do',
+    role: [
+      'Find which AI features a customer can really switch on, given its licences and version.',
+      'Build prototypes that prove it, including agents that call external AI APIs.',
+      'Integrate instances and services securely: REST, OAuth, Flow Designer, least privilege.',
+      'Make instances understandable: health checks, dashboards, documentation.',
+    ],
+    casesTitle: 'Work, described generically',
+    casesNote: 'No internal project names, customers or confidential detail.',
+    certTitle: 'Certifications',
+  },
+  fr: {
+    title: 'ServiceNow & agents IA',
+    eyebrow: 'ServiceNow',
+    summary: 'Je suis développeur ServiceNow chez Atos, dans une équipe d’innovation qui prototype l’IA sur la plateforme. Certifié CSA, avec deux accréditations de delivery sur les AI Agents et Now Assist.',
+    whatTitle: 'ServiceNow en un paragraphe',
+    what: 'ServiceNow est la plateforme qu’utilisent les grandes entreprises pour gérer leurs processus IT et métier : tickets, demandes, validations, actifs, RH. Tout est données et scripts sur une seule plateforme : une modification à un endroit touche toute l’entreprise. Sa couche IA, Now Assist et les AI Agents, peut résumer, suggérer et agir dans ces processus. Mon travail consiste à rendre cette IA utile et sûre en pratique.',
+    roleTitle: 'Ce que je fais',
+    role: [
+      'Déterminer quelles fonctions IA un client peut vraiment activer, selon ses licences et sa version.',
+      'Construire des prototypes qui le prouvent, y compris des agents qui appellent des API d’IA externes.',
+      'Intégrer instances et services de façon sécurisée : REST, OAuth, Flow Designer, moindre privilège.',
+      'Rendre les instances compréhensibles : bilans de santé, tableaux de bord, documentation.',
+    ],
+    casesTitle: 'Le travail, décrit de façon générique',
+    casesNote: 'Aucun nom de projet interne, client ou détail confidentiel.',
+    certTitle: 'Certifications',
+  },
+}[locale];
+---
+<Doc locale={locale} title={c.title} description={c.summary} eyebrow={c.eyebrow}>
+  <section class="doc-block"><h2>{c.whatTitle}</h2><p>{c.what}</p></section>
+  <section class="doc-block"><h2>{c.roleTitle}</h2><ul class="arrow-list">{c.role.map((r) => <li>{r}</li>)}</ul></section>
+  <section class="doc-block wide">
+    <h2>{c.casesTitle}</h2>
+    <p class="fine">{c.casesNote}</p>
+    <div class="card-grid">
+      {sn.map((id) => (
+        <article class="card">
+          <p class="work-client">{period(project(id).period, locale)}</p>
+          <h3><a class="plain" href={href(locale, `/projects/${id}/`)}>{project(id).title}</a></h3>
+          <p>{project(id).summary[locale]}</p>
+          <SkillTags locale={locale} ids={project(id).skills} />
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="doc-block"><h2>{c.certTitle}</h2><ul class="arrow-list">{certifications.map((x) => <li>{x[locale]}</li>)}</ul></section>
+</Doc>

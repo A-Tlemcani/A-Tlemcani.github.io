@@ -1,0 +1,24 @@
+---
+/** Shell for the explore pages: breadcrumb, title, one-minute summary on top, details below. */
+import Base from '../layouts/Base.astro';
+import { href, ui, type Locale } from '../i18n';
+
+interface Props { locale: Locale; title: string; description: string; eyebrow: string; crumbs?: [label: string, path: string][]; image?: string }
+const { locale, title, description, eyebrow, crumbs = [], image } = Astro.props;
+const t = ui[locale];
+---
+<Base locale={locale} title={`${title} · Abderrahman Tlemcani`} description={description} image={image}>
+  <article class="doc">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href={href(locale, '/')}>{t.home}</a>
+      {crumbs.map(([label, path]) => <><span aria-hidden="true">/</span><a href={href(locale, path)}>{label}</a></>)}
+    </nav>
+    <header class="doc-head">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="summary">{description}</p>
+      <slot name="head" />
+    </header>
+    <slot />
+  </article>
+</Base>

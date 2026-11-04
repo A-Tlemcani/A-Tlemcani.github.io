@@ -1,0 +1,94 @@
+---
+/**
+ * Case-study page. Copy is passed in as trusted, hand-written HTML strings (never user input),
+ * so small inline markup like <strong> stays readable in the source.
+ */
+import Base from '../layouts/Base.astro';
+import SkillTags from './SkillTags.astro';
+import '../styles/case.css';
+import { href, ui, type Locale } from '../i18n';
+import { project, type ProjectId } from '../data/projects';
+import { decisions, decisionsForProject } from '../data/decisions';
+
+export interface Direction { media: { video?: string; img?: string; alt: string }; title: string; body: string; preview: string }
+export interface CaseCopy {
+  title: string;
+  description: string;
+  eyebrow: string;
+  lead: string;
+  facts: [string, string][];
+  hero: { video?: string; img?: string; poster?: string; alt: string; width?: number; height?: number };
+  blocks: { h: string; html?: string; list?: string[]; directions?: Direction[]; media?: string }[];
+  previewLabel: string;
+  credit?: string;
+  cta: string;
+  decisionsTitle: string;
+  skillsTitle: string;
+}
+interface Props { locale: Locale; id: ProjectId; c: CaseCopy }
+const { locale, id, c } = Astro.props;
+const t = ui[locale];
+const pr = project(id);
+const decs = decisionsForProject(id);
+---
+<Base locale={locale} title={c.title} description={c.description} image={`/work/${id}.jpg`}>
+  <section class="case-hero">
+    <p class="eyebrow">{c.eyebrow}</p>
+    <h1>{pr.title}</h1>
+    <p class="lead" set:html={c.lead} />
+    <dl class="facts">{c.facts.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+  </section>
+
+  <div class="case-media">
+    {c.hero.video
+      ? <video src={c.hero.video} poster={c.hero.poster} muted loop playsinline preload="metadata" aria-label={c.hero.alt}></video>
+      : <img src={c.hero.img} alt={c.hero.alt} width={c.hero.width} height={c.hero.height} />}
+  </div>
+
+  <div class="case-body">
+    {c.blocks.map((b) => b.directions ? (
+      <>
+        <section class="case-block"><h2>{b.h}</h2>{b.html && <p set:html={b.html} />}</section>
+        <div class="directions">
+          {b.directions.map((d) => (
+            <article class="direction">
+              {d.media.video ? <video src={d.media.video} muted loop playsinline preload="none" aria-label={d.media.alt}></video> : <img src={d.media.img} alt={d.media.alt} loading="lazy" />}
+              <div><h3>{d.title}</h3><p>{d.body}</p><a href={d.preview} target="_blank" rel="noopener">{c.previewLabel}</a></div>
+            </article>
+          ))}
+        </div>
+      </>
+    ) : (
+      <section class="case-block">
+        <h2>{b.h}</h2>
+        <div>
+          {b.html && <p set:html={b.html} />}
+          {b.list && <ul>{b.list.map((li) => <li set:html={li} />)}</ul>}
+          {b.media && <Fragment set:html={b.media} />}
+        </div>
+      </section>
+    ))}
+
+    <section class="case-block">
+      <h2>{c.skillsTitle}</h2>
+      <div class="stack-links">
+        <SkillTags locale={locale} ids={pr.skills} />
+        {decs.length > 0 && (
+          <>
+            <h3 class="mini">{c.decisionsTitle}</h3>
+            <ul class="link-list">{decs.map((d) => <li><a href={href(locale, `/decisions/${d}/`)}>{decisions[d].title[locale]}</a></li>)}</ul>
+          </>
+        )}
+      </div>
+    </section>
+  </div>
+  {c.credit && <p class="case-media credit" set:html={c.credit} />}
+  <section class="case-cta">
+    <h2>{c.cta}</h2>
+    <a class="btn btn-primary btn-lg" href={href(locale, '/#contact')}>{t.letsTalk}</a>
+  </section>
+</Base>
+
+<script>
+  import '../scripts/case';
+</script>

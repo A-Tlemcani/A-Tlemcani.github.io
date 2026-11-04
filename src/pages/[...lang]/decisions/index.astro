@@ -1,0 +1,23 @@
+---
+import Doc from '../../../components/Doc.astro';
+import { href, type Locale } from '../../../i18n';
+import { langPaths } from '../../../i18n/paths';
+import { decisions, decisionIds } from '../../../data/decisions';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props as { locale: Locale };
+const c = {
+  en: { title: 'Decisions', eyebrow: 'Why X over Y', summary: 'Short records of the technical choices behind my work: the context, the choice, why, and what it costs. One minute each.' },
+  fr: { title: 'Décisions', eyebrow: 'Pourquoi X plutôt que Y', summary: 'De courtes fiches sur les choix techniques derrière mon travail : le contexte, le choix, pourquoi, et ce que ça coûte. Une minute chacune.' },
+}[locale];
+---
+<Doc locale={locale} title={c.title} description={c.summary} eyebrow={c.eyebrow}>
+  <div class="card-grid">
+    {decisionIds.map((id) => (
+      <a class="card" href={href(locale, `/decisions/${id}/`)}>
+        <h2>{decisions[id].title[locale]}</h2>
+        <p>{decisions[id].decision[locale]}</p>
+      </a>
+    ))}
+  </div>
+</Doc>

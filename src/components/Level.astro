@@ -1,0 +1,12 @@
+---
+import type { Locale } from '../i18n';
+import { levelName, type Skill } from '../data/skills';
+
+interface Props { locale: Locale; level: Skill['level'] }
+const { locale, level } = Astro.props;
+const name = levelName[level][locale];
+---
+<span class="level" title={`${level}/5 · ${name}`}>
+  <span class="dots" aria-hidden="true">{[1, 2, 3, 4, 5].map((n) => <i class={n <= level ? 'on' : undefined}></i>)}</span>
+  <span>{level}/5 · {name}</span>
+</span>

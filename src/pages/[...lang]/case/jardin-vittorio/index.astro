@@ -1,0 +1,77 @@
+---
+import CaseStudy, { type CaseCopy } from '../../../../components/CaseStudy.astro';
+import { langPaths } from '../../../../i18n/paths';
+import type { Locale } from '../../../../i18n';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props as { locale: Locale };
+const m = '/case/jardin-vittorio';
+
+const copy: Record<Locale, CaseCopy> = {
+  en: {
+    title: 'Jardin Vittorio: direct-booking site, Marrakech · Case study · Abderrahman Tlemcani',
+    description: 'Case study: a direct-booking website for two apartments in Marrakech, synced with Airbnb and Booking.com, with 3D depth-layer photos, a strict CSP and end-to-end tests.',
+    eyebrow: 'Case study · Client project · 2026',
+    lead: 'Two private apartments in Marrakech, booked mostly through Airbnb and Booking.com. The owner wanted his own site to feel <strong>luxurious, simple and very clear</strong> (the previous one “felt cheap”), take bookings directly, and never double-book.',
+    facts: [['Role', 'Offer, research, design, build'], ['Stack', 'Astro · Node · Playwright'], ['Guests', 'International: English, Italian'], ['Status', 'Design round 2 · in progress']],
+    hero: { img: `${m}/a-3d-wiggle.webp`, alt: 'The garden hero photo, split into depth layers that move against each other', width: 960, height: 600 },
+    blocks: [
+      { h: 'From offer to build', list: [
+        '<strong>Research first:</strong> channel-manager architecture (single source of truth, signed webhooks, booking state machine), Moroccan constraints, and payments for a non-resident owner.',
+        '<strong>A clear offer:</strong> three fixed-price packs (capture requests → take bookings → full service with quarterly reporting) and a “what we need from you” list per pack.',
+        '<strong>Pre-launch checklist:</strong> money traps, 20 security items, legal and trust for Morocco and GDPR, quality.',
+      ] },
+      { h: '3D without a scan', html: 'The owner had photos, not a 3D scan. So each hero photo is <strong>AI-upscaled</strong> (tiled, up to 2880 px), then split into <strong>near / middle / far layers</strong> with a depth model, with the gaps behind each layer filled by <strong>LaMa inpainting</strong>. On arrival the camera drifts and near things slide against far ones: real parallax, nothing is scaled. The cost is a few kilobytes of JS, with no 3D engine.' },
+      { h: 'Three directions', html: 'Same content, same booking module (two “doors”, one per apartment; the second switches to WhatsApp until it opens), three art directions. Open the interactive previews (single files, about 3 MB each; the WhatsApp number in them is a placeholder).', directions: [
+        { media: { img: `${m}/a-desktop.webp`, alt: 'Direction A, desktop page' }, title: 'A · Cinematic garden', body: 'Forest and amber. A full-bleed 3D garden with a glass booking bar docked at its foot; the gallery pans as you scroll.', preview: '/previews/jardin-vittorio-a.html' },
+        { media: { img: `${m}/b-desktop.webp`, alt: 'Direction B, desktop page' }, title: 'B · Editorial riad', body: 'Slate and terracotta, Bodoni italics. The 3D pool sits in a tall arch; booking reads as a sentence.', preview: '/previews/jardin-vittorio-b.html' },
+        { media: { img: `${m}/c-desktop.webp`, alt: 'Direction C, desktop page' }, title: 'C · Night salon', body: 'Black and tan, dark by concept: the photos are the light. A bento whose rooms light up one by one.', preview: '/previews/jardin-vittorio-c.html' },
+      ] },
+      { h: 'On a phone', media: `<img src="${m}/a-mobile.webp" alt="Direction A at phone width, from hero to booking" loading="lazy" />` },
+      { h: 'Engineering', list: [
+        'Strict CSP (<code>default-src \'self\'</code>, no inline scripts or styles), so the site carries no third-party trackers.',
+        'Budgets enforced by end-to-end tests: <strong>20 KB of JS</strong> and 25 KB of CSS per page.',
+        'i18n-ready (English first, Italian next), Playwright e2e suite, Conventional Commits and a PR-only workflow.',
+        'Accounts, domain and payments opened in the client’s name; card payments only through a hosted page.',
+      ] },
+    ],
+    previewLabel: 'Open interactive preview ↗',
+    cta: 'Running a rental? Book direct.',
+    decisionsTitle: 'Decisions behind it',
+    skillsTitle: 'Skills & decisions',
+  },
+  fr: {
+    title: 'Jardin Vittorio : site de réservation directe, Marrakech · Étude de cas · Abderrahman Tlemcani',
+    description: 'Étude de cas : un site de réservation directe pour deux appartements à Marrakech, synchronisé avec Airbnb et Booking.com, avec photos 3D en couches de profondeur, CSP stricte et tests de bout en bout.',
+    eyebrow: 'Étude de cas · Projet client · 2026',
+    lead: 'Deux appartements privés à Marrakech, réservés surtout via Airbnb et Booking.com. Le propriétaire voulait un site à lui <strong>luxueux, simple et très clair</strong> (l’ancien « faisait bon marché »), qui prenne des réservations en direct sans jamais de double réservation.',
+    facts: [['Rôle', 'Offre, recherche, design, développement'], ['Stack', 'Astro · Node · Playwright'], ['Voyageurs', 'Internationaux : anglais, italien'], ['Statut', 'Deuxième tour de design · en cours']],
+    hero: { img: `${m}/a-3d-wiggle.webp`, alt: 'La photo du jardin, découpée en couches de profondeur qui bougent les unes par rapport aux autres', width: 960, height: 600 },
+    blocks: [
+      { h: 'De l’offre au développement', list: [
+        '<strong>La recherche d’abord :</strong> architecture avec channel manager (une seule source de vérité, webhooks signés, machine à états des réservations), contraintes marocaines, et paiements pour un propriétaire non résident.',
+        '<strong>Une offre claire :</strong> trois forfaits (recevoir des demandes → prendre des réservations → service complet avec bilan trimestriel) et, pour chacun, la liste « ce dont j’ai besoin de vous ».',
+        '<strong>Check-list avant lancement :</strong> pièges financiers, 20 points de sécurité, aspects juridiques et confiance pour le Maroc et le RGPD, qualité.',
+      ] },
+      { h: 'De la 3D sans scan', html: 'Le propriétaire avait des photos, pas de scan 3D. Chaque photo d’accueil est donc <strong>agrandie par IA</strong> (par tuiles, jusqu’à 2880 px), puis découpée en <strong>plans proche / moyen / lointain</strong> par un modèle de profondeur, les trous derrière chaque plan étant comblés par <strong>inpainting LaMa</strong>. À l’arrivée, la caméra dérive et le proche glisse devant le lointain : une vraie parallaxe, rien n’est agrandi. Le coût : quelques kilo-octets de JS, sans moteur 3D.' },
+      { h: 'Trois directions', html: 'Même contenu, même module de réservation (deux « portes », une par appartement ; la seconde bascule sur WhatsApp en attendant son ouverture), trois directions artistiques. Ouvrez les aperçus interactifs (fichiers uniques d’environ 3 Mo ; le numéro WhatsApp est fictif).', directions: [
+        { media: { img: `${m}/a-desktop.webp`, alt: 'Direction A, page ordinateur' }, title: 'A · Jardin cinématique', body: 'Forêt et ambre. Un jardin 3D plein écran, avec une barre de réservation en verre à sa base ; la galerie défile au scroll.', preview: '/previews/jardin-vittorio-a.html' },
+        { media: { img: `${m}/b-desktop.webp`, alt: 'Direction B, page ordinateur' }, title: 'B · Riad éditorial', body: 'Ardoise et terre cuite, italiques Bodoni. La piscine 3D s’inscrit dans une haute arche ; la réservation se lit comme une phrase.', preview: '/previews/jardin-vittorio-b.html' },
+        { media: { img: `${m}/c-desktop.webp`, alt: 'Direction C, page ordinateur' }, title: 'C · Salon de nuit', body: 'Noir et fauve, sombre par principe : les photos sont la lumière. Une grille dont les pièces s’allument une à une.', preview: '/previews/jardin-vittorio-c.html' },
+      ] },
+      { h: 'Sur mobile', media: `<img src="${m}/a-mobile.webp" alt="Direction A en largeur téléphone, de l’accueil à la réservation" loading="lazy" />` },
+      { h: 'Ingénierie', list: [
+        'CSP stricte (<code>default-src \'self\'</code>, aucun script ni style en ligne) : aucun traceur tiers sur le site.',
+        'Budgets vérifiés par les tests de bout en bout : <strong>20 Ko de JS</strong> et 25 Ko de CSS par page.',
+        'Prêt pour plusieurs langues (anglais d’abord, italien ensuite), suite Playwright, Conventional Commits et workflow uniquement par pull requests.',
+        'Comptes, domaine et paiements ouverts au nom du client ; paiement par carte uniquement via une page hébergée.',
+      ] },
+    ],
+    previewLabel: 'Ouvrir l’aperçu interactif ↗',
+    cta: 'Vous louez un bien ? Prenez les réservations en direct.',
+    decisionsTitle: 'Les décisions derrière',
+    skillsTitle: 'Compétences & décisions',
+  },
+};
+---
+<CaseStudy locale={locale} id="jardin-vittorio" c={copy[locale]} />

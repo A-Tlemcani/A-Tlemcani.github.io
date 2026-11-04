@@ -1,0 +1,12 @@
+---
+import { href, type Locale } from '../i18n';
+import { skills, type SkillId } from '../data/skills';
+
+interface Props { locale: Locale; ids: readonly SkillId[]; label?: string }
+const { locale, ids, label } = Astro.props;
+---
+{ids.length > 0 && (
+  <ul class="tags" aria-label={label}>
+    {ids.map((id) => <li><a href={href(locale, `/skills/${id}/`)} data-tier={skills[id].tier}>{skills[id].name}</a></li>)}
+  </ul>
+)}
