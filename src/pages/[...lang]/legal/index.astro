@@ -1,0 +1,45 @@
+---
+/**
+ * Mentions légales (LCEN, art. 1-1 since the SREN law of 2024) and privacy note.
+ * Fields marked VERIFY must be filled by the owner before this page goes live.
+ */
+import Doc from '../../../components/Doc.astro';
+import { type Locale } from '../../../i18n';
+import { langPaths } from '../../../i18n/paths';
+import { profile } from '../../../data/site';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props as { locale: Locale };
+
+const owner = {
+  status: 'Entrepreneur individuel (EI)', // VERIFY: legal status
+  siren: 'SIREN : à compléter', // VERIFY: SIREN number
+  address: 'Adresse professionnelle : à compléter (Strasbourg, France)', // VERIFY: professional or domiciliation address
+};
+const host = 'GitHub, Inc. — 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, United States — https://github.com';
+
+const c = {
+  en: {
+    title: 'Legal notice & privacy', eyebrow: 'Legal', summary: 'Who publishes this site, who hosts it, and what happens to your data: nothing is collected.',
+    publisher: 'Publisher', director: 'Publication director', hosting: 'Hosting', privacyTitle: 'Privacy',
+    privacy: 'This site sets no cookies and loads no tracker or third-party script. The host (GitHub Pages) may keep technical server logs, such as IP addresses, for security. If you email me, I use your message only to reply, and I delete it on request.',
+    ipTitle: 'Content', ip: 'The texts, designs and code of the demos are © Abderrahman Tlemcani unless stated otherwise. Third-party assets are credited on the page where they appear. Brands shown in showcases are fictional.',
+  },
+  fr: {
+    title: 'Mentions légales & confidentialité', eyebrow: 'Mentions légales', summary: 'Qui publie ce site, qui l’héberge, et ce que deviennent vos données : rien n’est collecté.',
+    publisher: 'Éditeur', director: 'Directeur de la publication', hosting: 'Hébergement', privacyTitle: 'Confidentialité',
+    privacy: 'Ce site ne dépose aucun cookie et ne charge aucun traceur ni script tiers. L’hébergeur (GitHub Pages) peut conserver des journaux techniques, comme les adresses IP, pour des raisons de sécurité. Si vous m’écrivez, votre message sert uniquement à vous répondre et je le supprime sur simple demande.',
+    ipTitle: 'Contenus', ip: 'Les textes, visuels et le code des démos sont © Abderrahman Tlemcani sauf mention contraire. Les ressources de tiers sont créditées sur la page où elles apparaissent. Les marques présentées dans les vitrines sont fictives.',
+  },
+}[locale];
+---
+<Doc locale={locale} title={c.title} description={c.summary} eyebrow={c.eyebrow}>
+  <section class="doc-block">
+    <h2>{c.publisher}</h2>
+    <p>{profile.name} · {owner.status} · {owner.siren}<br />{owner.address}<br /><a href={`mailto:${profile.email}`}>{profile.email}</a></p>
+  </section>
+  <section class="doc-block"><h2>{c.director}</h2><p>{profile.name}</p></section>
+  <section class="doc-block"><h2>{c.hosting}</h2><p>{host}</p></section>
+  <section class="doc-block"><h2>{c.privacyTitle}</h2><p>{c.privacy}</p></section>
+  <section class="doc-block"><h2>{c.ipTitle}</h2><p>{c.ip}</p></section>
+</Doc>

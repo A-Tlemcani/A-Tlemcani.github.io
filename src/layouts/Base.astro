@@ -90,7 +90,7 @@ const commands = [
 
     <footer class="footer">
       <p>© {new Date().getFullYear()} {profile.name}. {t.footer}</p>
-      <a href="#top">{t.backTop}</a>
+      <span class="footer-links"><a href={href(locale, '/legal/')}>{t.legal}</a> <a href="#top">{t.backTop}</a></span>
     </footer>
 
     <dialog class="palette" id="palette" aria-label={t.paletteLabel}>

@@ -7,7 +7,7 @@ import { decisionIds } from '../data/decisions';
 /** Every page in both languages, with hreflang alternates. Built from the same data as the pages. */
 export function GET() {
   const paths = [
-    '/', '/skills/', '/decisions/', '/how-i-work/', '/servicenow/', '/case/dar-nila/', '/case/jardin-vittorio/',
+    '/', '/skills/', '/decisions/', '/how-i-work/', '/servicenow/', '/legal/', '/case/dar-nila/', '/case/jardin-vittorio/',
     ...projectIds.map((id) => `/projects/${id}/`),
     ...skillIds.map((id) => `/skills/${id}/`),
     ...decisionIds.map((id) => `/decisions/${id}/`),
