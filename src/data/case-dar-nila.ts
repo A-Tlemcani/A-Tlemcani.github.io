@@ -1,0 +1,81 @@
+import type { CaseCopy } from '../components/CaseStudy.astro';
+import type { Locale } from '../i18n';
+
+/** Dar Nila case-study copy. Shared by the case page and the /lab/ design previews. */
+const m = '/case/dar-nila';
+const credit = 'Courtyard scan: “La Cour des Lauriers – Jardin” by <a href="https://superspl.at/scene/c9aeee17" target="_blank" rel="noopener noreferrer">schague</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>';
+
+export const darNila: Record<Locale, CaseCopy> = {
+  en: {
+    title: 'Dar Nila: 3D-scan booking showcase · Case study · Abderrahman Tlemcani',
+    description: 'Case study: a direct-booking showcase for Marrakech riad owners that opens on a real Gaussian-splat 3D scan, with three design directions and a photos-only ↔ 3D toggle.',
+    eyebrow: 'Case study · Showcase · 2026',
+    lead: 'Short-term-rental owners in Marrakech only have photos. Dar Nila shows them what their own direct-booking site becomes with a <strong>3D scan</strong> of their place: guests glide through the real courtyard, pick a room, and book.',
+    facts: [['Role', 'Concept, design, 3D, front end'], ['Stack', 'Astro · Three.js · Spark (Gaussian splats)'], ['3D', 'Real scan (CC BY), depth-map 2.5D'], ['Status', 'Design gate: 3 directions']],
+    hero: { video: `${m}/a-3d-glide.mp4`, poster: '/work/dar-nila.jpg', alt: 'Recording: the camera glides through the scanned courtyard as the page scrolls' },
+    blocks: [
+      { h: 'The problem', html: 'Owners pay 15–20% commission to platforms, and their own sites look like every other listing: a photo carousel. A guest can’t <em>feel</em> a riad from photos. The pitch needed to answer one question in two seconds: <strong>“what does my place gain from 3D?”</strong>' },
+      { h: 'What I built', list: [
+        '<strong>Scroll glide through a real scan:</strong> a Gaussian-splat capture of a courtyard rendered with Spark on Three.js. A regular photo paints first and the scan streams in after.',
+        '<strong>“Photos only ↔ With a 3D scan” toggle:</strong> the same page tells the same story both ways, so an owner sees the difference on their own phone.',
+        '<strong>Three 3D moments:</strong> the glide, a cut-away dollhouse room picker, and free exploration with hotspots that open the matching room.',
+        '<strong>Booking flow:</strong> availability calendar, nightly price breakdown with cleaning fee and tourist tax, guest details, request-to-book confirmation (mock, no payment).',
+        '<strong>Honest 3D:</strong> real scans are labelled as such, AI depth effects as “AI 3D impression”, and every asset licence is credited.',
+      ] },
+      { h: 'Three directions', html: 'Each direction has its own art direction and its own signature 3D moment. Open the interactive previews (single-file builds, best on desktop Chrome/Edge; A and C are about 16 MB because the scan is inside).', directions: [
+        { media: { video: `${m}/a-3d-glide.mp4`, alt: 'Direction A recording' }, title: 'A · Courtyard', body: 'Forest green, bone and amber. The hero is the scan and glides as you scroll.', preview: '/previews/dar-nila-a.html' },
+        { media: { video: `${m}/b-3d-dollhouse.mp4`, alt: 'Direction B recording' }, title: 'B · Editorial riad', body: 'Paper, slate and rust. Pick your room on a cut-away model and book it in one tap.', preview: '/previews/dar-nila-b.html' },
+        { media: { video: `${m}/c-3d-explore.mp4`, alt: 'Direction C recording' }, title: 'C · Night salon', body: 'Black and tan. Walk the scan freely; hotspots open rooms and “Book this room”.', preview: '/previews/dar-nila-c.html' },
+      ] },
+      { h: 'Booking, on a phone', media: `<div class="pair"><video src="${m}/a-booking-flow.mp4" muted loop playsinline preload="none" aria-label="Recording of the booking flow"></video><img src="${m}/a-mobile-3d.jpg" alt="Direction A on a phone, 3D hero" loading="lazy" /></div>` },
+      { h: 'Engineering', list: [
+        '3D loads after first paint and only when visible, with static fallbacks for no-WebGL2, low-power devices and reduced motion.',
+        'Depth maps generated offline with Depth Anything V2 Small for the 2.5D photo mode; dev-only tools never ship.',
+        'Frame-by-frame capture tooling to record 3D moments on a GPU-less cloud machine, plus a packer that turns each direction into one double-clickable HTML file.',
+        'Self-hosted fonts and assets, no CDN scripts; Conventional Commits and a PR-based workflow.',
+      ] },
+      { h: 'For your place', html: 'A scan of your courtyard, rooms and terrace takes one visit by my partner 3D studio. From it I build the same experience with <strong>your real place</strong> and no invented rooms, wired to your channel manager so the calendar never double-books.' },
+    ],
+    previewLabel: 'Open interactive preview ↗',
+    credit: `${credit}, used as a stand-in. Dar Nila is a fictional property.`,
+    cta: 'Want this for your property?',
+    decisionsTitle: 'Decisions behind it',
+    skillsTitle: 'Skills & decisions',
+  },
+  fr: {
+    title: 'Dar Nila : vitrine de réservation avec scan 3D · Étude de cas · Abderrahman Tlemcani',
+    description: 'Étude de cas : une vitrine de réservation directe pour propriétaires de riads à Marrakech, qui s’ouvre sur un vrai scan 3D Gaussian splat, avec trois directions de design et une bascule photos ↔ 3D.',
+    eyebrow: 'Étude de cas · Vitrine · 2026',
+    lead: 'À Marrakech, les propriétaires de locations courte durée n’ont que des photos. Dar Nila leur montre ce que devient leur propre site de réservation avec un <strong>scan 3D</strong> de leur lieu : le voyageur glisse dans le vrai patio, choisit sa chambre et réserve.',
+    facts: [['Rôle', 'Concept, design, 3D, front-end'], ['Stack', 'Astro · Three.js · Spark (Gaussian splats)'], ['3D', 'Vrai scan (CC BY), 2.5D par carte de profondeur'], ['Statut', 'Étape de design : 3 directions']],
+    hero: { video: `${m}/a-3d-glide.mp4`, poster: '/work/dar-nila.jpg', alt: 'Enregistrement : la caméra glisse dans le patio scanné au fil du défilement' },
+    blocks: [
+      { h: 'Le problème', html: 'Les propriétaires paient 15 à 20 % de commission aux plateformes, et leurs propres sites ressemblent à toutes les annonces : un carrousel de photos. On ne <em>ressent</em> pas un riad en photos. Le pitch devait répondre à une question en deux secondes : <strong>« qu’est-ce que la 3D apporte à mon lieu ? »</strong>' },
+      { h: 'Ce que j’ai construit', list: [
+        '<strong>Travelling au défilement dans un vrai scan :</strong> une capture Gaussian splat d’un patio, rendue avec Spark sur Three.js. Une photo classique s’affiche d’abord, le scan arrive ensuite.',
+        '<strong>Bascule « Photos seules ↔ Avec un scan 3D » :</strong> la même page raconte la même histoire des deux façons, pour que le propriétaire voie la différence sur son téléphone.',
+        '<strong>Trois moments 3D :</strong> le travelling, une maquette en coupe pour choisir sa chambre, et une exploration libre avec des points d’intérêt qui ouvrent la chambre correspondante.',
+        '<strong>Parcours de réservation :</strong> calendrier des disponibilités, détail du prix par nuit avec frais de ménage et taxe de séjour, coordonnées, confirmation de demande (fictive, sans paiement).',
+        '<strong>3D honnête :</strong> les vrais scans sont présentés comme tels, les effets de profondeur IA comme « impression 3D IA », et chaque licence est créditée.',
+      ] },
+      { h: 'Trois directions', html: 'Chaque direction a sa propre direction artistique et son propre moment 3D. Ouvrez les aperçus interactifs (fichiers uniques, idéals sur Chrome/Edge ordinateur ; A et C font environ 16 Mo car le scan est inclus).', directions: [
+        { media: { video: `${m}/a-3d-glide.mp4`, alt: 'Enregistrement de la direction A' }, title: 'A · Patio', body: 'Vert forêt, os et ambre. Le héros est le scan, qui glisse au défilement.', preview: '/previews/dar-nila-a.html' },
+        { media: { video: `${m}/b-3d-dollhouse.mp4`, alt: 'Enregistrement de la direction B' }, title: 'B · Riad éditorial', body: 'Papier, ardoise et rouille. Choisissez votre chambre sur une maquette en coupe et réservez-la d’un geste.', preview: '/previews/dar-nila-b.html' },
+        { media: { video: `${m}/c-3d-explore.mp4`, alt: 'Enregistrement de la direction C' }, title: 'C · Salon de nuit', body: 'Noir et fauve. Parcourez le scan librement ; les points d’intérêt ouvrent les chambres et « Réserver cette chambre ».', preview: '/previews/dar-nila-c.html' },
+      ] },
+      { h: 'Réserver sur mobile', media: `<div class="pair"><video src="${m}/a-booking-flow.mp4" muted loop playsinline preload="none" aria-label="Enregistrement du parcours de réservation"></video><img src="${m}/a-mobile-3d.jpg" alt="Direction A sur téléphone, héros 3D" loading="lazy" /></div>` },
+      { h: 'Ingénierie', list: [
+        'La 3D se charge après le premier affichage et seulement quand elle est visible, avec des alternatives statiques sans WebGL2, sur appareils peu puissants et en mouvement réduit.',
+        'Cartes de profondeur générées hors ligne avec Depth Anything V2 Small pour le mode photo 2.5D ; les outils de développement ne sont jamais livrés.',
+        'Outils de capture image par image pour enregistrer les moments 3D sur une machine cloud sans GPU, et un empaqueteur qui transforme chaque direction en un seul fichier HTML.',
+        'Polices et ressources auto-hébergées, aucun script CDN ; Conventional Commits et workflow par pull requests.',
+      ] },
+      { h: 'Pour votre lieu', html: 'Le scan de votre patio, de vos chambres et de votre terrasse se fait en une visite de mon studio 3D partenaire. À partir de là, je construis la même expérience avec <strong>votre vrai lieu</strong>, sans pièce inventée, reliée à votre channel manager pour que le calendrier ne crée jamais de double réservation.' },
+    ],
+    previewLabel: 'Ouvrir l’aperçu interactif ↗',
+    credit: `${credit.replace('Courtyard scan', 'Scan du patio').replace(' by ', ' par ')}, utilisé comme substitut. Dar Nila est une propriété fictive.`,
+    cta: 'Vous voulez ça pour votre lieu ?',
+    decisionsTitle: 'Les décisions derrière',
+    skillsTitle: 'Compétences & décisions',
+  },
+};
