@@ -23,8 +23,17 @@ const c = {
       'Architecture and security decisions.',
       'Talking with you, and what we agree.',
       'The final review of anything that ships.',
-      'Your confidential data: it does not go into an AI tool without your written OK.',
+      'What happens to your data with AI: the rules below.',
     ],
+    dataTitle: 'Your data and AI',
+    dataIntro: 'I use AI tools on code and documents. I do not put your data in them without a written OK.',
+    data: [
+      'Public or demo data: any tool.',
+      'Your code, no personal data: a cloud tool with no-training terms, or a local model. I ask you once, in writing.',
+      'Personal data (GDPR): no AI by default. If it is needed, a local model or a tool named in a signed data-processing agreement, plus your written OK.',
+      'Employer or secret data: no AI unless the data owner approves, in writing, a named tool.',
+    ],
+    dataNote: 'Passwords and keys never go into an AI tool. Ask me for the list of tools I use.',
     whyTitle: 'Why tell you this',
     why: 'Because it changes what you get: the speed of a small team, with one engineer accountable for every line. And because you should know how the work is made before you pay for it. This site, its demos and the client work are built exactly this way.',
     links: [['The decision behind this', '/decisions/ai-assisted-delivery/'], ['What I do myself, and with partners', '/skills/'], ['Every decision record', '/decisions/']],
@@ -47,8 +56,17 @@ const c = {
       'Les décisions d’architecture et de sécurité.',
       'L’échange avec vous, et ce que nous convenons.',
       'La relecture finale de tout ce qui est livré.',
-      'Vos données confidentielles : elles n’entrent dans aucun outil d’IA sans votre accord écrit.',
+      'Ce que deviennent vos données avec l’IA : les règles ci-dessous.',
     ],
+    dataTitle: 'Vos données et l’IA',
+    dataIntro: 'J’utilise des outils d’IA sur le code et les documents. Je n’y mets pas vos données sans accord écrit.',
+    data: [
+      'Données publiques ou de démo : tout outil.',
+      'Votre code, sans données personnelles : un outil cloud sans entraînement sur mes données, ou un modèle local. Je vous demande un accord écrit, une fois.',
+      'Données personnelles (RGPD) : pas d’IA par défaut. Si c’est nécessaire, un modèle local ou un outil nommé dans un contrat de sous-traitance signé, plus votre accord écrit.',
+      'Données d’un employeur ou secrètes : pas d’IA, sauf accord écrit du propriétaire des données pour un outil nommé.',
+    ],
+    dataNote: 'Les mots de passe et les clés n’entrent jamais dans un outil d’IA. Je vous donne la liste des outils sur demande.',
     whyTitle: 'Pourquoi vous le dire',
     why: 'Parce que ça change ce que vous obtenez : la vitesse d’une petite équipe, avec un seul ingénieur responsable de chaque ligne. Et parce que vous devez savoir comment le travail est fait avant de le payer. Ce site, ses démos et les projets clients sont construits exactement ainsi.',
     links: [['La décision derrière cette méthode', '/decisions/ai-assisted-delivery/'], ['Ce que je fais moi-même, et avec des partenaires', '/skills/'], ['Toutes les fiches de décision', '/decisions/']],
@@ -71,6 +89,12 @@ const c = {
   <section class="doc-block">
     <h2>{c.neverTitle}</h2>
     <ul class="arrow-list">{c.never.map((n) => <li>{n}</li>)}</ul>
+  </section>
+  <section class="doc-block">
+    <h2>{c.dataTitle}</h2>
+    <p>{c.dataIntro}</p>
+    <ul class="arrow-list">{c.data.map((d) => <li>{d}</li>)}</ul>
+    <p>{c.dataNote}</p>
   </section>
   <section class="doc-block">
     <h2>{c.whyTitle}</h2>
